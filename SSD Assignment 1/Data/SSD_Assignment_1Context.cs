@@ -10,7 +10,7 @@ using SSD_Assignment_1.Models;
 namespace SSD_Assignment_1.Data
 {
 
-    public class SSD_Assignment_1Context : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class SSD_Assignment_1Context : IdentityDbContext<ApplicationUser>
     {
         public SSD_Assignment_1Context (DbContextOptions<SSD_Assignment_1Context> options)
             : base(options)
