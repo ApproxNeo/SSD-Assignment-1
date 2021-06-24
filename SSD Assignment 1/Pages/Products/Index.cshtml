@@ -1,0 +1,26 @@
+﻿@page
+@model SSD_Assignment_1.Pages.Products.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+<div class="card-deck">
+    @foreach (var item in Model.Product)
+    {
+        <div class="card" style="max-width: 18rem;">
+            <img class="card-img-top" src="~/images/MilkBone.jpg" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.Price)</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">@Html.DisplayFor(modelItem => item.Brand)</small>
+            </div>
+        </div>
+    }
+</div>
+
+  

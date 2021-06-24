@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,12 +27,15 @@ namespace SSD_Assignment_1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<SSD_Assignment_1Context>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<SSD_Assignment_1Context>();
             services.AddRazorPages();
+
+            services.AddDbContext<SSD_Assignment_1Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SSD_Assignment_1Context")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,7 +9,7 @@ using SSD_Assignment_1.Data;
 
 namespace SSD_Assignment_1.Data.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(SSD_Assignment_1Context))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
