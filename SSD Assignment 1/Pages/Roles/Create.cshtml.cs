@@ -9,6 +9,7 @@ using SSD_Assignment_1.Models;
 
 namespace SSD_Assignment_1.Pages.Roles
 {
+    Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
