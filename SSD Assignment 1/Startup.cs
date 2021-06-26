@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SSD_Assignment_1.Data;
+using SSD_Assignment_1.Models;
 
 namespace SSD_Assignment_1
 {
@@ -30,12 +31,18 @@ namespace SSD_Assignment_1
             services.AddDbContext<SSD_Assignment_1Context>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<SSD_Assignment_1Context>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                //.AddEntityFrameworkStores<SSD_Assignment_1Context>();
             services.AddRazorPages();
 
             services.AddDbContext<SSD_Assignment_1Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SSD_Assignment_1Context")));
+
+            services.AddIdentity<ApplicationUser, Microsoft.AspNetCore.Identity.IdentityRole>()
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<SSD_Assignment_1Context>()
+                .AddDefaultTokenProviders();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
