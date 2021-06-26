@@ -1,0 +1,30 @@
+﻿@page
+@model SSD_Assignment_1.Pages.Roles.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+<h2>Delete</h2>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Application Role</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationRole.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationRole.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationRole.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationRole.Description)
+        </dd>
+    </dl>
+    <form method="post">
+        <input type="hidden" asp-for="ApplicationRole.Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

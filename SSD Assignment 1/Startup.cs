@@ -38,10 +38,39 @@ namespace SSD_Assignment_1
             services.AddDbContext<SSD_Assignment_1Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SSD_Assignment_1Context")));
 
-            services.AddIdentity<ApplicationUser, Microsoft.AspNetCore.Identity.IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<SSD_Assignment_1Context>()
                 .AddDefaultTokenProviders();
+
+
+            services.AddMvc()
+            .AddRazorPagesOptions(options =>
+            {
+                // options.Conventions.AllowAnonymousToFolder("/Movies");
+                // options.Conventions.AuthorizePage("/Movies/Create");
+                //  options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
+                 options.Conventions.AuthorizeFolder("/Products");
+            });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 1;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 1;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
 
         }
 
@@ -64,7 +93,7 @@ namespace SSD_Assignment_1
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthorization();
             app.UseAuthentication();
             app.UseAuthorization();
 

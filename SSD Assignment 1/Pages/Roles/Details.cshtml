@@ -1,0 +1,53 @@
+﻿@page
+@model SSD_Assignment_1.Pages.Roles.DetailsModel
+@{
+    ViewData["Title"] = "Details";
+}
+<h2>Details</h2>
+<div>
+    <h4>ApplicationRole</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationRole.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationRole.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationRole.CreatedDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationRole.CreatedDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationRole.IPAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationRole.IPAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationRole.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationRole.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationRole.NormalizedName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationRole.NormalizedName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ApplicationRole.ConcurrencyStamp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationRole.ConcurrencyStamp)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.ApplicationRole.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
+

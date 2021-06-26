@@ -1,0 +1,73 @@
+﻿@page
+@model SSD_Assignment_1.Pages.Roles.ManageModel
+@{
+    ViewData["Title"] = "Manage User Roles";
+}
+<h2>Role-based Authorization Management</h2>
+<div class="row">
+    <div class="col-md-4">
+        <a asp-page="Create">[Create New Role]</a> |
+        <a asp-page="Manage">[Manage User Roles]</a>
+    </div>
+</div>
+
+@if (TempData["message"] != null)
+{
+    <p><font color="red">@TempData["message"]</font></p>
+}
+
+<h3>[Role View - show the users in each role] </h3>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Role Name </th>
+            <th>Users assigned to this role</th>
+            <th>No. of Users</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model.Listroles)
+        {
+            <tr>
+                <td> @Html.DisplayFor(modelItem => item.Name)</td>
+                <td> @Model.ListUsersInRole(item.Name)</td>
+                <td> @Model.usercountinrole </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>[Add Role to User]</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            @Html.Label("Select User : ")
+            @Html.DropDownListFor(m => m.selectedusername, Model.UsersSelectList, "Select User", new { @class = "form-control" })
+            @Html.Label("Assign Role : ")
+            @Html.DropDownListFor(m => m.selectedrolename, Model.RolesSelectList, "Select Role", new { @class = "form-control" })
+            <br />
+            <input type="submit" value="Assign" />
+        </form>
+    </div>
+
+</div>
+
+<hr />
+<h3>[Delete A User from a Role]</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            @Html.Label("Select User : ")
+            @Html.DropDownListFor(m => m.delusername, Model.UsersSelectList, "Select User", new { @class = "form-control" })
+            @Html.Label("Select Role : ")
+            @Html.DropDownListFor(m => m.delrolename, Model.RolesSelectList, "Select Role", new { @class = "form-control" })
+            <br />
+            <input type="submit" value="Delete this user from Role" asp-page-handler="DeleteUserRole" />
+        </form>
+    </div>
+</div>
+
