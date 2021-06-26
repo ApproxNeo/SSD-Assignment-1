@@ -91,9 +91,7 @@ namespace SSD_Assignment_1
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-            app.UseAuthorization();
             app.UseAuthentication();
             app.UseAuthorization();
 
