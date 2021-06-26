@@ -50,7 +50,7 @@ namespace SSD_Assignment_1
                 // options.Conventions.AllowAnonymousToFolder("/Movies");
                 // options.Conventions.AuthorizePage("/Movies/Create");
                 //  options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
-                 options.Conventions.AuthorizeFolder("/Products");
+                 options.Conventions.AuthorizeFolder("/Roles");
             });
 
             services.Configure<IdentityOptions>(options =>
@@ -65,7 +65,7 @@ namespace SSD_Assignment_1
 
                 // Lockout settings
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 1;
+                options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
 
                 // User settings
