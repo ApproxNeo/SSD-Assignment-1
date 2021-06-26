@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SSD_Assignment_1.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SSD_Assignment_1.Pages.Roles
 {
-    Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class CreateModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
