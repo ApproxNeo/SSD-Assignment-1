@@ -4,14 +4,6 @@
     ViewData["Title"] = "Role Listing";
 }
 <h2>Role Listing</h2>
-
-<div class="row">
-    <div class="col-md-4">
-        <a asp-page="Create">[Create New Role]</a> |
-        <a asp-page="Manage">[Manage User Roles]</a>
-    </div>
-</div>
-
 <table class="table">
     <thead>
         <tr>
@@ -43,4 +35,11 @@
         }
     </tbody>
 </table>
+
+<div class="row">
+    <div class="col-md-4">
+        <a class="btn btn-primary btn-group-lg" asp-page="Create">Create New Role</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-primary btn-group-lg" asp-page="Manage">Manage User Roles</a>
+    </div>
+</div>
 

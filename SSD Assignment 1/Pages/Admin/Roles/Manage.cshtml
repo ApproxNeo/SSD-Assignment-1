@@ -4,19 +4,12 @@
     ViewData["Title"] = "Manage User Roles";
 }
 <h2>Role-based Authorization Management</h2>
-<div class="row">
-    <div class="col-md-4">
-        <a asp-page="Create">[Create New Role]</a> |
-        <a asp-page="Manage">[Manage User Roles]</a>
-    </div>
-</div>
-
 @if (TempData["message"] != null)
 {
     <p><font color="red">@TempData["message"]</font></p>
 }
 
-<h3>[Role View - show the users in each role] </h3>
+<h3>Role View - show the users in each role </h3>
 <hr />
 <table class="table">
     <thead>
@@ -49,7 +42,7 @@
             @Html.Label("Assign Role : ")
             @Html.DropDownListFor(m => m.selectedrolename, Model.RolesSelectList, "Select Role", new { @class = "form-control" })
             <br />
-            <input type="submit" value="Assign" />
+            <input class="btn btn-primary btn-group-lg" type="submit" value="Assign" />
         </form>
     </div>
 
@@ -66,8 +59,17 @@
             @Html.Label("Select Role : ")
             @Html.DropDownListFor(m => m.delrolename, Model.RolesSelectList, "Select Role", new { @class = "form-control" })
             <br />
-            <input type="submit" value="Delete this user from Role" asp-page-handler="DeleteUserRole" />
+            <input class="btn btn-primary btn-group-lg" type="submit" value="Delete this user from Role" asp-page-handler="DeleteUserRole" />
         </form>
     </div>
 </div>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <a class="btn btn-primary btn-group-lg" asp-page="Create">Create New Role</a>
+        <a class="btn btn-primary btn-group-lg" asp-page="Manage">Manage User Roles</a>
+    </div>
+</div>
+
 
