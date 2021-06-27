@@ -1,0 +1,20 @@
+﻿@page
+@model SSD_Assignment_1.Pages.Admin.Roles.ManageAddModel
+@{
+    ViewData["Title"] = "Add User Roles";
+}
+@if (TempData["message"] != null)
+{
+    <p><font color="red">@TempData["message"]</font></p>
+}
+
+<h3>Add Role to User</h3>
+<form method="post">
+    @Html.Label("Select User : ")
+    @Html.DropDownListFor(m => m.selectedusername, Model.UsersSelectList, "Select User", new { @class = "form-control" })
+    @Html.Label("Assign Role : ")
+    @Html.DropDownListFor(m => m.selectedrolename, Model.RolesSelectList, "Select Role", new { @class = "form-control" })
+    <br />
+    <input class="btn btn-primary btn-group-lg" type="submit" value="Assign" />
+    <a class="btn btn-primary btn-group-lg" asp-page="Manage">Manage User Roles</a>
+</form>
