@@ -9,15 +9,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SSD_Assignment_1.Models;
 
-namespace SSD_Assignment_1.Pages.Roles
+namespace SSD_Assignment_1.Pages.Admin.Roles
 {
     public class ManageModel : PageModel
     {
-        private readonly SSD_Assignment_1.Data.SSD_Assignment_1Context _context;
+        private readonly Data.SSD_Assignment_1Context _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public ManageModel(SSD_Assignment_1.Data.SSD_Assignment_1Context context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public ManageModel(Data.SSD_Assignment_1Context context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
@@ -76,7 +76,7 @@ namespace SSD_Assignment_1.Pages.Roles
         public async Task<IActionResult> OnPostAsync(string selectedusername, string selectedrolename)
         {
             //When the Assign button is pressed 
-            if ((selectedusername == null) || (selectedrolename == null))
+            if (selectedusername == null || selectedrolename == null)
             {
                 return RedirectToPage("Manage");
             }
@@ -98,7 +98,7 @@ namespace SSD_Assignment_1.Pages.Roles
         public async Task<IActionResult> OnPostDeleteUserRoleAsync(string delusername, string delrolename)
         {
             //When the Delete this user from  Role button is pressed 
-            if ((delusername == null) || (delrolename == null))
+            if (delusername == null || delrolename == null)
             {
                 return RedirectToPage("Manage");
             }

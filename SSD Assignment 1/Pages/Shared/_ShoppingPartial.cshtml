@@ -4,24 +4,15 @@
 @inject UserManager<ApplicationUser> UserManager
 
 <ul class="navbar-nav">
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-page="/Wishlist" title="Manage"><img src="~/images/shopping-cart.png" /></a>
-        </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
-        </li>
-    }
-    else
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
     {
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="" asp-page="/Admin/Index">Admin</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-page="#"><img src="~/images/shopping-cart.png" /></a>
-        </li>
     }
+
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="#"><img src="~/images/shopping-cart.png" /></a>
+    </li>
+
 </ul>
