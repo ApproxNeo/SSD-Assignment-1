@@ -8,20 +8,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SSD_Assignment_1.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace SSD_Assignment_1.Pages.Roles
+namespace SSD_Assignment_1.Pages.Admin.Roles
 {
     [Authorize(Roles = "Admin")]
-    public class EditModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
 
-
-        public EditModel(RoleManager<ApplicationRole> roleManager)
+        public DetailsModel(RoleManager<ApplicationRole> roleManager)
         {
             _roleManager = roleManager;
         }
 
-        [BindProperty]
         public ApplicationRole ApplicationRole { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string id)
@@ -38,29 +36,6 @@ namespace SSD_Assignment_1.Pages.Roles
                 return NotFound();
             }
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            ApplicationRole appRole = await _roleManager.FindByIdAsync(ApplicationRole.Id);
-
-            appRole.Id = ApplicationRole.Id;
-            appRole.Name = ApplicationRole.Name;
-            appRole.Description = ApplicationRole.Description;
-
-            IdentityResult roleRuslt = await _roleManager.UpdateAsync(appRole);
-
-            if (roleRuslt.Succeeded)
-            {
-                return RedirectToPage("./Index");
-
-            }
-            return RedirectToPage("./Index");
         }
 
     }

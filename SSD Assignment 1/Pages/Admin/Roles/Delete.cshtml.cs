@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SSD_Assignment_1.Models;
 
-namespace SSD_Assignment_1.Pages.Roles
+namespace SSD_Assignment_1.Pages.Admin.Roles
 {
     [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
