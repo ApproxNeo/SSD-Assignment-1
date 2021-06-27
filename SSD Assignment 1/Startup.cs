@@ -51,6 +51,7 @@ namespace SSD_Assignment_1
                 // options.Conventions.AuthorizePage("/Movies/Create");
                 //  options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
                  options.Conventions.AuthorizeFolder("/Roles");
+                options.Conventions.AuthorizeFolder("/Admin/Products");
             });
 
             services.Configure<IdentityOptions>(options =>
