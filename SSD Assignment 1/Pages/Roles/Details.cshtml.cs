@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SSD_Assignment_1.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SSD_Assignment_1.Pages.Roles
 {
+    [Authorize(Roles = "Admin")]
     public class DetailsModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;

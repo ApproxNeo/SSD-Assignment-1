@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SSD_Assignment_1.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SSD_Assignment_1.Pages.Roles
 {
+    [Authorize(Roles = "Admin")]
     public class ManageModel : PageModel
     {
         private readonly SSD_Assignment_1.Data.SSD_Assignment_1Context _context;
