@@ -33,8 +33,6 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
 
         public string selectedrolename { set; get; }
         public string selectedusername { set; get; }
-        public string delrolename { set; get; }
-        public string delusername { set; get; }
 
         public int usercountinrole { set; get; }
         public IList<ApplicationRole> Listroles { get; set; }
@@ -96,27 +94,5 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
 
             return RedirectToPage("Manage");
         }
-
-        public async Task<IActionResult> OnPostDeleteUserRoleAsync(string delusername, string delrolename)
-        {
-            //When the Delete this user from  Role button is pressed 
-            if (delusername == null || delrolename == null)
-            {
-                return RedirectToPage("Manage");
-            }
-
-            ApplicationUser user = _context.Users.Where(u => u.UserName == delusername).FirstOrDefault();
-
-            if (await _userManager.IsInRoleAsync(user, delrolename))
-            {
-                await _userManager.RemoveFromRoleAsync(user, delrolename);
-
-                TempData["message"] = "Role removed from this user successfully";
-            }
-
-            return RedirectToPage("Manage");
-        }
-
-
     }
 }

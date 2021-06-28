@@ -16,13 +16,11 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
     public class ManageModel : PageModel
     {
         private readonly Data.SSD_Assignment_1Context _context;
-        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
 
         public ManageModel(Data.SSD_Assignment_1Context context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             _context = context;
-            _userManager = userManager;
             _roleManager = roleManager;
         }
 
@@ -30,11 +28,6 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
         //contain  a list of roles to populate select box
         public SelectList UsersSelectList;
         // contain  a list of Users to populate select box
-
-        public string selectedrolename { set; get; }
-        public string selectedusername { set; get; }
-        public string delrolename { set; get; }
-        public string delusername { set; get; }
 
         public int usercountinrole { set; get; }
         public IList<ApplicationRole> Listroles { get; set; }
@@ -73,50 +66,6 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
                         select r;
             Listroles = await roles.ToListAsync();
         }
-
-
-        public async Task<IActionResult> OnPostAsync(string selectedusername, string selectedrolename)
-        {
-            //When the Assign button is pressed 
-            if (selectedusername == null || selectedrolename == null)
-            {
-                return RedirectToPage("Manage");
-            }
-
-            ApplicationUser AppUser = _context.Users.SingleOrDefault(u => u.UserName == selectedusername);
-            ApplicationRole AppRole = await _roleManager.FindByNameAsync(selectedrolename);
-
-            IdentityResult roleResult = await _userManager.AddToRoleAsync(AppUser, AppRole.Name);
-
-            if (roleResult.Succeeded)
-            {
-                TempData["message"] = "Role added to this user successfully";
-                return RedirectToPage("Manage");
-            }
-
-            return RedirectToPage("Manage");
-        }
-
-        public async Task<IActionResult> OnPostDeleteUserRoleAsync(string delusername, string delrolename)
-        {
-            //When the Delete this user from  Role button is pressed 
-            if (delusername == null || delrolename == null)
-            {
-                return RedirectToPage("Manage");
-            }
-
-            ApplicationUser user = _context.Users.Where(u => u.UserName == delusername).FirstOrDefault();
-
-            if (await _userManager.IsInRoleAsync(user, delrolename))
-            {
-                await _userManager.RemoveFromRoleAsync(user, delrolename);
-
-                TempData["message"] = "Role removed from this user successfully";
-            }
-
-            return RedirectToPage("Manage");
-        }
-
 
     }
 }
