@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SSD_Assignment_1.Data;
 
 namespace SSD_Assignment_1.Migrations
 {
     [DbContext(typeof(SSD_Assignment_1Context))]
-    partial class SSD_Assignment_1ContextModelSnapshot : ModelSnapshot
+    [Migration("20210628085338_Audit")]
+    partial class Audit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -233,40 +235,28 @@ namespace SSD_Assignment_1.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("SSD_Assignment_1.Models.Audit", b =>
+            modelBuilder.Entity("SSD_Assignment_1.Models.AuditRecord", b =>
                 {
-                    b.Property<int>("AuditId")
+                    b.Property<int>("AuditID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AffectedColumns")
+                    b.Property<string>("AuditAction")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("DateTimeStamp")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("NewValues")
+                    b.Property<int>("KeyProductID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OldValues")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("AuditID");
 
-                    b.Property<string>("PrimaryKey")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TableName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AuditId");
-
-                    b.ToTable("AuditLogs");
+                    b.ToTable("AuditRecords");
                 });
 
             modelBuilder.Entity("SSD_Assignment_1.Models.Product", b =>

@@ -47,10 +47,6 @@ namespace SSD_Assignment_1
             services.AddMvc()
             .AddRazorPagesOptions(options =>
             {
-                // options.Conventions.AllowAnonymousToFolder("/Movies");
-                // options.Conventions.AuthorizePage("/Movies/Create");
-                //  options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
-                 options.Conventions.AuthorizeFolder("/Roles");
                 options.Conventions.AuthorizeFolder("/Admin/Products");
             });
 

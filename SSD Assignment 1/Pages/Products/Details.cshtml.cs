@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using SSD_Assignment_1.Data;
 using SSD_Assignment_1.Models;
+using Westwind.AspNetCore.Markdown;
 
 namespace SSD_Assignment_1.Pages.Products
 {

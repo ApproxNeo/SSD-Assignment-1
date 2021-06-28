@@ -1,0 +1,67 @@
+﻿@page
+@model SSD_Assignment_1.Pages.Admin.Audits.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Action
+            </th>
+            <th>
+                Table
+            </th>
+            <th>
+                Date/Time
+            </th>
+            <th>
+                Affected Columns
+            </th>
+            <th>
+                Old Values
+            </th>
+            <th>
+                New Values
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Audit) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuditId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TableName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AffectedColumns)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OldValues)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NewValues)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ using SSD_Assignment_1.Models;
 
 namespace SSD_Assignment_1.Pages.Admin.Products
 {
-    [Authorize(Roles = "Product manager")]
+    [Authorize(Roles = "Product manager, prodMngr")]
     public class CreateModel : PageModel
     {
         private readonly SSD_Assignment_1.Data.SSD_Assignment_1Context _context;
@@ -39,7 +40,7 @@ namespace SSD_Assignment_1.Pages.Admin.Products
             }
 
             _context.Product.Add(Product);
-            await _context.SaveChangesAsync();
+            await _context.SaveAudit(User?.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             return RedirectToPage("./Index");
         }

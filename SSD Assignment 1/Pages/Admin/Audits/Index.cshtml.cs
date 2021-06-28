@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using SSD_Assignment_1.Data;
 using SSD_Assignment_1.Models;
 
-namespace SSD_Assignment_1.Pages.Admin.Products
+namespace SSD_Assignment_1.Pages.Admin.Audits
 {
     [Authorize(Roles = "Product manager, prodMngr")]
     //couldnt get "Product manager" role to work at all,
@@ -24,11 +24,11 @@ namespace SSD_Assignment_1.Pages.Admin.Products
             _context = context;
         }
 
-        public IList<Product> Product { get;set; }
+        public IList<Audit> Audit { get; set; }
 
         public async Task OnGetAsync()
         {
-            Product = await _context.Product.ToListAsync();
+            Audit = await _context.AuditLogs.ToListAsync();
         }
     }
 }
