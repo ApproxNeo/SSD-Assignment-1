@@ -16,7 +16,7 @@
     @Html.Label("Select Role : ")
     @Html.DropDownListFor(m => m.delrolename, Model.RolesSelectList, "Select Role", new { @class = "form-control" })
     <br />
-    <input class="btn btn-primary btn-group-lg" type="submit" value="Delete this user from Role" asp-page-handler="DeleteUserRole" />
+    <input class="btn btn-primary btn-group-lg" type="submit" value="Delete this user from Role"/>
     <a class="btn btn-primary btn-group-lg" asp-page="Manage">Manage User Roles</a>
 </form>
 
