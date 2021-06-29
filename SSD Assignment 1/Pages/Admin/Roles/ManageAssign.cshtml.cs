@@ -37,26 +37,6 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
         public int usercountinrole { set; get; }
         public IList<ApplicationRole> Listroles { get; set; }
 
-        public string ListUsersInRole(string rolename)
-        {
-            // Method - return a string showing a list of users  based on specified role as parameter
-            string strListUsersInRole = "";
-            string roleid = _roleManager.Roles.SingleOrDefault(u => u.Name == rolename).Id;
-
-            // Get no. of users for each specified role
-            var count = _context.UserRoles.Where(u => u.RoleId == roleid).Count();
-            usercountinrole = count;
-
-            //Get a list of users for each specified role
-            var listusers = _context.UserRoles.Where(u => u.RoleId == roleid);
-
-            foreach (var oParam in listusers)
-            {    // loop thru each objects-  get username based on userid and append to the returned string
-                var userobj = _context.Users.SingleOrDefault(s => s.Id == oParam.UserId);
-                strListUsersInRole += "[" + userobj.UserName + "] ";
-            }
-            return strListUsersInRole;
-        }
 
         public async Task OnGetAsync()
         {   //HTTPGet  - when form is being loaded
