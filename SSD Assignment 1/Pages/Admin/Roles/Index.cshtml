@@ -4,6 +4,24 @@
     ViewData["Title"] = "Role Listing";
 }
 <h2>Role Listing</h2>
+<body style=" text-align: center;">
+    <form style="display: inline-block; margin-right:160px;">
+        <p style="font-size: 15px;margin-left: 100px">
+            <input style="        width: 100%;
+        box-sizing: border-box;
+        border: 2px solid #d1d0d0;
+        border-radius: 4px;
+        font-size: 16px;
+        background-color: white;
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        text-align: center;
+        padding: 12px 20px 12px 40px;"
+                   type="text" asp-for="Searchstring" placeholder="Enter a role" /><br />
+            <br /> <input type="submit" value="Enter" class="btn btn-primary btn-group-lg" />
+        </p>
+    </form>
+</body>
 <table class="table">
     <thead>
         <tr>
