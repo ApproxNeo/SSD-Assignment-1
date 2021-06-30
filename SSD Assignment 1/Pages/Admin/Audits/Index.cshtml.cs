@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using SSD_Assignment_1.Data;
 using SSD_Assignment_1.Models;
 
@@ -29,6 +30,22 @@ namespace SSD_Assignment_1.Pages.Admin.Audits
         public async Task OnGetAsync()
         {
             Audit = await _context.AuditLogs.ToListAsync();
+        }
+
+        public string DictParser (string dict)
+        {
+            if (dict is null)
+            {
+                return "None";
+            }
+            var dic = JsonConvert.DeserializeObject<Dictionary<string, string>>(dict);
+            string output = "";
+            foreach (var value in dic)
+            {
+                output += value.Key + " : " + value.Value + "\n";
+            }
+            System.Console.WriteLine(output);
+            return output;
         }
     }
 }
