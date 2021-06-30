@@ -2,15 +2,20 @@
 @model SSD_Assignment_1.Pages.Admin.Audits.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Audit";
 }
 
-<h1>Index</h1>
+<h1>Audit Logs</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
+<style>
+    table {
+        font-size: 14px;
+    }
+    td {
+        word-wrap: break-word;
+    }
+</style>
+<table class="table table-striped" align="left">
     <thead>
         <tr>
             <th>
@@ -34,7 +39,6 @@
             <th>
                 New Values
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -52,14 +56,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
             </td>
-            <td>
+            <td style="max-width:20px;">
+                
                 @Html.DisplayFor(modelItem => item.AffectedColumns)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OldValues)
+                @{
+                    var text = Model.DictParser(item.OldValues);
+                }
+                <pre>@Html.DisplayFor(modelItem => text)</pre>
+
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NewValues)
+                @{
+                    var text2 = Model.DictParser(item.NewValues);
+                }
+                <pre>@Html.DisplayFor(modelItem => text2)</pre>
             </td>
         </tr>
 }
