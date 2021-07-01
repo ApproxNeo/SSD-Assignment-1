@@ -29,6 +29,8 @@ namespace SSD_Assignment_1.Data
 
         public DbSet<SSD_Assignment_1.Models.Audit> AuditLogs { get; set; }
 
+        public DbSet<SSD_Assignment_1.Models.CartItem> CartItems { get; set; }
+
         public virtual async Task<int> SaveAudit(string userId = null)
         {
             OnBeforeSaveChanges(userId);
@@ -58,10 +60,12 @@ namespace SSD_Assignment_1.Data
                     switch (entry.State)
                     {
                         case EntityState.Added:
+                            auditEntry.ChangedColumns.Add(propertyName);
                             auditEntry.AuditType = SSD_Assignment_1.Enums.AuditType.Create;
                             auditEntry.NewValues[propertyName] = property.CurrentValue;
                             break;
                         case EntityState.Deleted:
+                            auditEntry.ChangedColumns.Add(propertyName);
                             auditEntry.AuditType = SSD_Assignment_1.Enums.AuditType.Delete;
                             auditEntry.OldValues[propertyName] = property.OriginalValue;
                             break;

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,6 +44,11 @@ namespace SSD_Assignment_1
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<SSD_Assignment_1Context>()
                 .AddDefaultTokenProviders();
+
+            services.AddNotyf(config => 
+                               {config.DurationInSeconds = 10; 
+                                config.IsDismissable = true; 
+                                config.Position = NotyfPosition.TopRight; });
 
 
             services.AddMvc()
@@ -86,6 +93,7 @@ namespace SSD_Assignment_1
                 app.UseHsts();
             }
 
+            app.UseNotyf();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();

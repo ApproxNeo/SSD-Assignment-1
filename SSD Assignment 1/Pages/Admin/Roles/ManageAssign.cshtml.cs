@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SSD_Assignment_1.Models;
 using Microsoft.AspNetCore.Authorization;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 namespace SSD_Assignment_1.Pages.Admin.Roles
 {
@@ -18,12 +19,14 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
         private readonly Data.SSD_Assignment_1Context _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly INotyfService _notyf;
 
-        public ManageAddModel(Data.SSD_Assignment_1Context context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public ManageAddModel(Data.SSD_Assignment_1Context context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, INotyfService notyf)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
+            _notyf = notyf;
         }
 
         public SelectList RolesSelectList;
@@ -68,7 +71,7 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
 
             if (roleResult.Succeeded)
             {
-                TempData["message"] = "Role added to this user successfully";
+                _notyf.Success("Role added to this user!");
                 return RedirectToPage("Manage");
             }
 

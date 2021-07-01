@@ -3,12 +3,6 @@
 @{
     ViewData["Title"] = "Delete User Roles";
 }
-
-@if (TempData["message"] != null)
-{
-    <p><font color="red">@TempData["message"]</font></p>
-}
-
 <h3>Delete A User from a Role</h3>
 <form method="post">
     @Html.Label("Select User : ")

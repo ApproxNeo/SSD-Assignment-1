@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -17,10 +18,13 @@ namespace SSD_Assignment_1.Pages.Admin.Products
     public class EditModel : PageModel
     {
         private readonly SSD_Assignment_1.Data.SSD_Assignment_1Context _context;
+        private readonly INotyfService _notyf;
 
-        public EditModel(SSD_Assignment_1.Data.SSD_Assignment_1Context context)
+
+        public EditModel(SSD_Assignment_1.Data.SSD_Assignment_1Context context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         [BindProperty]
@@ -73,6 +77,7 @@ namespace SSD_Assignment_1.Pages.Admin.Products
                 }
             }
 
+            _notyf.Success("Product updated successfully!");
             return RedirectToPage("./Index");
         }
 

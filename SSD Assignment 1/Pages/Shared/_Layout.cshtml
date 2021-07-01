@@ -6,7 +6,10 @@
     <title>Cesar's Creatures @ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+
 </head>
+
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -18,8 +21,8 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-                
-                
+
+
                 <div class="col-9">
                     <div class="navbar-nav row align-content-center">
                         <ul class="navbar-nav flex-grow-1">
@@ -32,11 +35,11 @@
                                 </div>
 
                             </li>
-                            
+
                         </ul>
                         <partial class="navbar" name="_LoginPartial" />
                     </div>
-                   
+
                     <div class="navbar-nav row">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
@@ -60,7 +63,11 @@
 
 
     </header>
+
+
+
     <div class="container">
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
@@ -70,12 +77,13 @@
         <div class="container ">
             &copy; 2021 - Cesar's Creatures - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
-        
+
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @await Component.InvokeAsync("Notyf")
 
     @RenderSection("Scripts", required: false)
 </body>

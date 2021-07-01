@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SSD_Assignment_1.Models;
 using Microsoft.AspNetCore.Authorization;
+using AspNetCoreHero.ToastNotification.Abstractions;
+
 namespace SSD_Assignment_1.Pages.Admin.Roles
 {
     [Authorize(Roles = "Admin")]
@@ -17,12 +19,14 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
         private readonly Data.SSD_Assignment_1Context _context;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly INotyfService _notyf;
 
-        public ManageDeleteModel(Data.SSD_Assignment_1Context context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+        public ManageDeleteModel(Data.SSD_Assignment_1Context context, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, INotyfService notyf)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
+            _notyf = notyf;
         }
 
         public SelectList RolesSelectList;
@@ -37,6 +41,8 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
 
         public int usercountinrole { set; get; }
         public IList<ApplicationRole> Listroles { get; set; }
+
+        public UserManager<ApplicationUser> UserManager => _userManager;
 
         public async Task OnGetAsync()
         {   //HTTPGet  - when form is being loaded
@@ -64,11 +70,11 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
 
             ApplicationUser user = _context.Users.Where(u => u.UserName == delusername).FirstOrDefault();
 
-            if (await _userManager.IsInRoleAsync(user, delrolename))
+            if (await UserManager.IsInRoleAsync(user, delrolename))
             {
-                await _userManager.RemoveFromRoleAsync(user, delrolename);
+                await UserManager.RemoveFromRoleAsync(user, delrolename);
 
-                TempData["message"] = "Role removed from this user successfully";
+                _notyf.Success("Role removed from this user successfully");
             }
 
             return RedirectToPage("Manage");
