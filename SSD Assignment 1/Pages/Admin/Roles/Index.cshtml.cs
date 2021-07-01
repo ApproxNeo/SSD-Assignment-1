@@ -15,18 +15,27 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
     public class IndexModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;
-
+        [BindProperty(SupportsGet = true)]
+        public string Searchstring { get; set; }//Role name to type
         public IndexModel(RoleManager<ApplicationRole> roleManager)
         {
             _roleManager = roleManager;
         }
-
+     
         public List<ApplicationRole> ApplicationRole { get; set; }
 
         public async Task OnGetAsync()
         {
+            var roles = from r in _roleManager.Roles
+                        select r;
+            if (!string.IsNullOrEmpty(Searchstring))
+            {
+                roles = roles.Where(s => s.Name.Contains(Searchstring));
+            }
+
+            
             // Get a list of roles
-            ApplicationRole = await _roleManager.Roles.ToListAsync();
+            ApplicationRole = await roles.ToListAsync();
 
         }
 
