@@ -24,7 +24,7 @@ namespace SSD_Assignment_1.Pages.Cart
 
         public void OnGet()
         {
-            IQueryable<string> CartQuery = from m in _context.CartItems where (User.FindFirst(ClaimTypes.NameIdentifier).Value == m.UserID) select m.CartID;
+            //IQueryable<string> CartQuery = from m in _context.CartItems where (User.FindFirst(ClaimTypes.NameIdentifier).Value == m.UserID) select m.CartID;
         }
     }
 }
