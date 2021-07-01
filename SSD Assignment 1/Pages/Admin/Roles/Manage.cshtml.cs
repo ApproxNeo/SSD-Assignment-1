@@ -32,7 +32,7 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
         public SelectList UsersSelectList;
         // contain  a list of Users to populate select box
 
-        public int usercountinrole { set; get; }
+        public int Usercountinrole { set; get; }
         public IList<ApplicationRole> Listroles { get; set; }
 
         public string ListUsersInRole(string rolename)
@@ -43,7 +43,7 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
 
             // Get no. of users for each specified role
             var count = _context.UserRoles.Where(u => u.RoleId == roleid).Count();
-            usercountinrole = count;
+            Usercountinrole = count;
 
             //Get a list of users for each specified role
             var listusers = _context.UserRoles.Where(u => u.RoleId == roleid);
