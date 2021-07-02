@@ -54,7 +54,10 @@ namespace SSD_Assignment_1
             services.AddMvc()
             .AddRazorPagesOptions(options =>
             {
-                //options.Conventions.AuthorizeFolder("/Admin/Products");
+                options.Conventions.AuthorizeFolder("/Admin/Products");
+                options.Conventions.AuthorizeFolder("/Admin/Roles");
+                options.Conventions.AuthorizeFolder("/Admin/Audit");
+                options.Conventions.AuthorizePage("/Admin/Index.cshtml");
             });
 
             services.Configure<IdentityOptions>(options =>
