@@ -15,7 +15,11 @@
             <div class="card-body">
                 <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
                 <p class="card-text">@Html.DisplayFor(modelItem => item.Price)</p>
-                <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.ID">Add to cart</a>
+                <form method="post">
+                    <input type="hidden" name="ProductID" value=@item.ID >
+                    <input class="btn btn-primary" type="submit" value="Add to cart" />
+                </form>
+                
             </div>
             <div class="card-footer">
                 <small class="text-muted">@Html.DisplayFor(modelItem => item.Brand)</small>

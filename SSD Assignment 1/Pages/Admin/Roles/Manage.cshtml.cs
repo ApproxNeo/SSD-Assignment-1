@@ -25,7 +25,7 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
         }
 
         [BindProperty(SupportsGet = true)]
-        public string SearchString { get; set; }//Role name to type
+        public string Searchstring { get; set; }//Role name to type
 
         public SelectList RolesSelectList;
         //contain  a list of roles to populate select box
@@ -67,9 +67,9 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
             // Get all the roles 
             var roles = from r in _roleManager.Roles
                         select r;
-            if (!string.IsNullOrEmpty(SearchString))
+            if (!string.IsNullOrEmpty(Searchstring))
             {
-                roles = roles.Where(s => s.Name.Contains(SearchString));
+                roles = roles.Where(s => s.Name.Contains(Searchstring));
             }
 
             Listroles = await roles.ToListAsync();

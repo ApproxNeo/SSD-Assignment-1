@@ -3,31 +3,16 @@
 @{
     ViewData["Title"] = "Manage User Roles";
 }
-<h2 style="text-align:center;">Role-based Authorization Management</h2><br />
-<br />
-<body style=" text-align: center;">
-    <form style="display: inline-block; margin-right:160px;">
-        <p style="font-size: 15px;margin-left: 100px">
-            <input style="        width: 100%;
-        box-sizing: border-box;
-        border: 2px solid #d1d0d0;
-        border-radius: 4px;
-        font-size: 16px;
-        background-color: white;
-        background-position: 10px 10px;
-        background-repeat: no-repeat;
-        text-align: center;
-        padding: 12px 20px 12px 40px;"
-                   type="text" asp-for="SearchString" placeholder="Enter a role" /><br />
-            <br /> <input type="submit" value="Enter" class="btn btn-primary btn-group-lg" />
-        </p>
+<h2 style="text-align:center;">Role-based Authorization Management</h2>
+
+<div class="col-6 my-3">
+    <form class="input-group">
+        <input type="text" class="form-control" asp-for="Searchstring" placeholder="Search for Roles">
+        <div class="input-group-append">
+            <input class="btn btn-outline-secondary" type="submit" value="Search">
+        </div>
     </form>
-</body>
-<br />
-@if (TempData["message"] != null)
-{
-    <p><font color="red">@TempData["message"]</font></p>
-}
+</div>
 
 <h3>Role View - show the users in each role </h3>
 <hr />
