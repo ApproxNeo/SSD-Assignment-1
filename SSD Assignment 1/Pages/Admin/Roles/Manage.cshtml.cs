@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SSD_Assignment_1.Pages.Admin.Roles
 {
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public class ManageModel : PageModel
     {
         private readonly Data.SSD_Assignment_1Context _context;
