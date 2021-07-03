@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -54,8 +55,13 @@ namespace SSD_Assignment_1
             services.AddMvc()
             .AddRazorPagesOptions(options =>
             {
-                //options.Conventions.AuthorizeFolder("/Admin/Products");
+                options.Conventions.AuthorizeFolder("/Admin/Products");
+                options.Conventions.AuthorizeFolder("/Admin/Roles");
+                options.Conventions.AuthorizeFolder("/Admin/Audit");
+      
             });
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie();
 
             services.Configure<IdentityOptions>(options =>
             {
