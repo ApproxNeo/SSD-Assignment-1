@@ -87,18 +87,20 @@ namespace SSD_Assignment_1
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment())
-            //{
-               // app.UseDeveloperExceptionPage();
-                //app.UseDatabaseErrorPage();
-            //}
-            //else
-            //{
+            if (env.IsDevelopment())
+            {
+               app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
                 app.UseStatusCodePages("text/html", "<h1>Status code page</h1> <h2>Status Code: {0}</h2>");
                 app.UseExceptionHandler("/Error");
+            }
+            else
+            {
+                //app.UseStatusCodePages("text/html", "<h1>Status code page</h1> <h2>Status Code: {0}</h2>");
+                //app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                //app.UseHsts();
-            //}
+                app.UseHsts();
+            }
 
             app.UseNotyf();
             app.UseHttpsRedirection();
