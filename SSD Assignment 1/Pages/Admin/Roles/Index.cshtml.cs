@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SSD_Assignment_1.Pages.Admin.Roles
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class IndexModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;

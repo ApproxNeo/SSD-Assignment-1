@@ -12,8 +12,6 @@ using SSD_Assignment_1.Data;
 using SSD_Assignment_1.Models;
 using SSD_Assignment_1.Pages.Cart;
 
-using static SSD_Assignment_1.Pages.Cart.CartManager;
-
 namespace SSD_Assignment_1.Pages.Products
 {
     [AllowAnonymous]
@@ -40,6 +38,12 @@ namespace SSD_Assignment_1.Pages.Products
         {
             Product = await _context.Product.ToListAsync();
 
+            if (!User.Identity.IsAuthenticated)
+            {
+                _notyf.Information("Log in to access our services");
+                return Redirect("/Identity/Account/Register");
+            }
+
             string UserId = User?.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             if (ProductId is null || UserId is null)
@@ -58,11 +62,11 @@ namespace SSD_Assignment_1.Pages.Products
                     UserId = UserId,
                     Quantity = 1
                 });
-                    await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
                 _notyf.Success("Item added to cart!");
                 return Page();
             }
-               
+
             _notyf.Information("Item added to cart already");
             return Page();
         }

@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using SSD_Assignment_1.Data;
+using SSD_Assignment_1.Models;
+using SSD_Assignment_1.Pages.Cart;
 
 namespace SSD_Assignment_1.Pages.Cart
 {
@@ -21,16 +26,29 @@ namespace SSD_Assignment_1.Pages.Cart
             _logger = logger;
             _context = context;
         }
+        public IQueryable<SSD_Assignment_1.Models.CartItem> CartQuery;
+        public IList<CartItem> Carts;
+        public List<Product> Products;
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            //IQueryable<string> CartQuery = from m in _context.CartItems where (User.FindFirst(ClaimTypes.NameIdentifier).Value == m.UserID) select m.CartID;
-            //User?.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            string UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            CartQuery = from m in _context.CartItems where UserId.Equals(m.UserId) select m;
+
+            Carts = CartQuery.ToList();
+
+            Products = new List<Product>();
+            foreach (var c in Carts)
+            {
+                int id = Convert.ToInt32(c.ProductId);
+                Product p = await _context.Product.FindAsync(id);                
+                Products.Add(p);
+            }
 
 
-        }
-
-
-        
+    
+        }        
     }
 }

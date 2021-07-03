@@ -8,3 +8,38 @@
     <h1 class="display-4">Cesar's Creatures</h1>
     <p>Home for the pets</p>
 </div>
+
+@if (Model.Carts.Count == 0)
+{
+    <p> You have no items in your cart yet!</p>
+}
+else
+{
+    <table class="table table-striped" align="left">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Individual Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Carts.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Products[i].Name)
+                    </td>
+                    <td>
+                        <input type="number" value=@Model.Carts[i].Quantity>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model.Products[i].Price)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

@@ -11,7 +11,8 @@ using SSD_Assignment_1.Models;
 
 namespace SSD_Assignment_1.Pages.Admin.Products
 {
-    [Authorize(Roles = "Product manager, prodMngr")]
+    [Authorize(Roles = "Product manager, Admin")]
+
     public class DetailsModel : PageModel
     {
         private readonly SSD_Assignment_1.Data.SSD_Assignment_1Context _context;
@@ -30,7 +31,7 @@ namespace SSD_Assignment_1.Pages.Admin.Products
                 return NotFound();
             }
 
-            Product = await _context.Product.FirstOrDefaultAsync(m => m.ID == id);
+            Product = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Product == null)
             {

@@ -11,8 +11,8 @@ using SSD_Assignment_1.Models;
 
 namespace SSD_Assignment_1.Pages.Admin.Products
 {
-    [Authorize(Roles = "Product manager")]
-    
+    [Authorize(Roles = "Product manager, Admin")]
+
     public class IndexModel : PageModel
     {
         private readonly SSD_Assignment_1.Data.SSD_Assignment_1Context _context;

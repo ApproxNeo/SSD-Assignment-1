@@ -31,7 +31,7 @@ namespace SSD_Assignment_1.Pages.Products
                 return NotFound();
             }
 
-            Product = await _context.Product.FirstOrDefaultAsync(m => m.ID == id);
+            Product = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
 
             if (Product == null)
             {

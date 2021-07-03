@@ -16,7 +16,7 @@
                 <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
                 <p class="card-text">@Html.DisplayFor(modelItem => item.Price)</p>
                 <form method="post">
-                    <input type="hidden" name="ProductID" value=@item.ID >
+                    <input type="hidden" name="ProductID" value=@item.Id >
                     <input class="btn btn-primary" type="submit" value="Add to cart" />
                 </form>
                 
