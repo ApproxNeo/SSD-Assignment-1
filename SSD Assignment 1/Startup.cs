@@ -82,6 +82,20 @@ namespace SSD_Assignment_1
                 options.User.RequireUniqueEmail = true;
             });
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                // options.Cookie.Name = "YourCookieName";
+                //  options.Cookie.Domain=
+                // options.LoginPath = "/Account/Login";
+                // options.LogoutPath = "/Account/Logout";
+                // options.AccessDeniedPath = "/Account/AccessDenied";
+
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(500);
+                options.SlidingExpiration = true;
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
