@@ -63,6 +63,8 @@ namespace SSD_Assignment_1.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             [Required]
+            [MinimumAge(18)]
+            [MaximumAge(100)]
             [Display(Name = "Birth Date")]
             [DataType(DataType.Date)]
             public DateTime BirthDate { get; set; }
