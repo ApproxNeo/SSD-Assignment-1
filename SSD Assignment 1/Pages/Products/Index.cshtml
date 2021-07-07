@@ -5,7 +5,18 @@
     ViewData["Title"] = "Index";
 }
 
-
+<form>
+    <p>
+        <select asp-for="SearchGenre" asp-items="Model.Genres">
+            <option value="">All</option>
+        </select>
+        <select asp-for="SearchBrand" asp-items="Model.Brands">
+            <option value="">All</option>
+        </select>
+        <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 
 <div class="card-deck">
     @foreach (var item in Model.Product)
