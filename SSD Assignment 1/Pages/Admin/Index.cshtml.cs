@@ -7,16 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace SSD_Assignment_1.Pages
+namespace SSD_Assignment_1.Pages.Admin
 {
     [Authorize(Roles = "Admin, Product manager")]
-    public class AdminIndexModel : PageModel
+    public class IndexModel : PageModel
     {
-        private readonly ILogger<AdminIndexModel> _logger;
+        private readonly ILogger<IndexModel> _logger;
 
-        public AdminIndexModel(ILogger<IndexModel> logger)
+        public IndexModel(ILogger<IndexModel> logger)
         {
-            _logger = (ILogger<AdminIndexModel>)logger;
+            _logger = (ILogger<IndexModel>)logger;
         }
 
         public void OnGet()
