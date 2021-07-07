@@ -61,6 +61,13 @@ namespace SSD_Assignment_1.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [MinimumAge(18)]
+            [MaximumAge(100)]
+            [Display(Name = "Birth Date")]
+            [DataType(DataType.Date)]
+            public DateTime BirthDate { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -75,7 +82,7 @@ namespace SSD_Assignment_1.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email, BirthDate = Input.BirthDate };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
