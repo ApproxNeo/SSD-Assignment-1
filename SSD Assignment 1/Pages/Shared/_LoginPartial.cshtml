@@ -15,17 +15,23 @@
             <li>
                 <button type="submit" class="nav-link text-dark">Logout</button>
             </li>
+            <li>
+                <a class="nav-link text-dark" asp-area="" asp-page="/Cart/Index"><img src="~/images/shopping-cart.png" /></a>
+            </li>
         </ul>
     </form>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
-        <li>
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
-    </ul>
+<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+    <li>
+        <a class="nav-link text-dark" asp-area="" asp-page="/Cart/Index"><img src="~/images/shopping-cart.png" /></a>
+    </li>
+</ul>
 }
