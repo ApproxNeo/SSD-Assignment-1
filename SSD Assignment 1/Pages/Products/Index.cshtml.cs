@@ -51,7 +51,7 @@ namespace SSD_Assignment_1.Pages.Products
                 return Page();
             }
 
-            IQueryable<SSD_Assignment_1.Models.CartItem> CartQuery = from m in _context.CartItems where UserId.Equals(m.UserId) select m;
+            IQueryable<CartItem> CartQuery = from m in _context.CartItems where UserId.Equals(m.UserId) select m;
             CartQuery = CartQuery.Where(s => s.ProductId == ProductId);
 
             if (CartQuery.Count() == 0)

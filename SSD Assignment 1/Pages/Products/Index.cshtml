@@ -11,7 +11,7 @@
     @foreach (var item in Model.Product)
     {
         <div class="card mb-3" style="max-width: 15rem; min-width: 15rem;">
-            <img class="card-img-top" src="~/images/MilkBone.jpg" alt="Card image cap">
+            <img style="height:200px; width:auto;"class="card-img-top" src="~/images/@item.PhotoPath" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
                 <p class="card-text">@Html.DisplayFor(modelItem => item.Price)</p>

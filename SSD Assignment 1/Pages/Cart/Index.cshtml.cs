@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -46,9 +47,47 @@ namespace SSD_Assignment_1.Pages.Cart
                 Product p = await _context.Product.FindAsync(id);                
                 Products.Add(p);
             }
+            
+        }
+        public class qChange
+        {
+            [Required]
+            public string ProductId { get; set; }
+            [Required]
+            public int NQuantity { get; set; }
+        }
 
+        [BindProperty]
+        public qChange QChange { get; set; }
 
-    
-        }        
+        public async Task<IActionResult> OnPostAsync()
+        {       
+            string UserId = User?.FindFirst(ClaimTypes.NameIdentifier).Value;          
+
+            IQueryable<CartItem> CartQuery = from m in _context.CartItems where UserId.Equals(m.UserId) select m;
+            IQueryable<CartItem> ModifiedCart = CartQuery.Where(s => s.ProductId == QChange.ProductId);
+         
+            if (ModifiedCart.Count() != 1)
+            {
+                return Page();
+            }
+
+            ModifiedCart.FirstOrDefault().Quantity = QChange.NQuantity;
+            await _context.SaveChangesAsync();
+
+            Carts = CartQuery.ToList();
+
+            Products = new List<Product>();
+            foreach (var c in Carts)
+            {
+                int id = Convert.ToInt32(c.ProductId);
+                Product p = await _context.Product.FindAsync(id);
+                Products.Add(p);
+            }
+
+            return Page();
+
+        }
+
     }
 }

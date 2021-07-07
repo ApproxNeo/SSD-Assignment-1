@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SSD_Assignment_1.Data;
 
 namespace SSD_Assignment_1.Migrations
 {
     [DbContext(typeof(SSD_Assignment_1Context))]
-    partial class SSD_Assignment_1ContextModelSnapshot : ModelSnapshot
+    [Migration("20210704114141_PhotoPath")]
+    partial class PhotoPath
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

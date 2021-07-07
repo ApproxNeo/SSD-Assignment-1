@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Product.Name" class="control-label"></label>
@@ -43,6 +43,25 @@
                 <input asp-for="Product.Price" class="form-control" />
                 <span asp-validation-for="Product.Price" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="Photo" class="custom-file-input form-control" />
+                    <label class="custom-file-label">Click here to change photo</label>
+                </div>
+            </div>
+
+            
+            <script>
+                $(document).ready(function () {
+                    $('.custom-file-input').on("change", function () {
+                        console.log("Changed")
+                        var fileName = $(this).val().split('\\').pop();
+                        $('.custom-file-label').html(fileName);
+                    });
+                })
+            </script>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

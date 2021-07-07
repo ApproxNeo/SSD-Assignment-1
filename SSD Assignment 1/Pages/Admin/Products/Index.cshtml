@@ -61,6 +61,7 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
+        <b>@Html.DisplayFor(modelItem => item.PhotoPath)</b>
 }
     </tbody>
 </table>
