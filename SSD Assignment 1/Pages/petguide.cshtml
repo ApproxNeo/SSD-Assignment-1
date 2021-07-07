@@ -1,0 +1,41 @@
+﻿@page
+@model SSD_Assignment_1.Pages.petguideModel
+@{
+    ViewData["Title"] = "PetGuide";
+}
+<style>
+    li {
+        font-style: italic;
+    }
+</style>
+
+<div>
+    <h2 style="text-align:center;">HOW TO TAKE CARE OF YOUR PETS?</h2><br />
+    <div class="row">
+        <div class="col-4">
+            <img src="~/images/puppy.jpg" style="width:300px;height:250px;">
+        </div>
+        <div class="col-4">
+            <img src="~/images/rabbit.jpg" style="width:300px;height:250px;">
+        </div>
+        <div class="col-4">
+            <img src="~/images/cat.jpg" style="width:300px;height:250px;">
+        </div>
+    </div><br />
+    <ol>
+
+        <li style="text-align: justify;"><strong>PROVIDE A PROTECTED AND CLEAN LIVING ENVIRONMENT FOR YOUR DOG</strong><br /><br />Shelter from the elements and hazards, as well as good hygiene, are basic to a quality life.<br /></li>
+        <li style="text-align: justify;"><strong>ALWAYS KEEP FRESH WATER AVAILABLE.</strong><br /><br /> Maintaining optimal hydration is important for health and energy.<br /></li>
+        <li style="text-align: justify;"><strong>FEED A QUALITY DIET AND PREVENT OBESITY</strong><br /><br />Overweight humans and animals can adversely affect health in many ways. Follow the dietary recommendations that your veterinarian will make according to the nutritional needs of your dog, based on size, age, level of activity and breed. Remember to provide healthy treats rather than table scraps, as rewards.<br /></li>
+        <li style="text-align: justify;"><strong>HAVE YOUR PET EXAMINED BY A VETERINARIAN ON A REGULAR BASIS</strong><br /><br />Your veterinarian will provide you with the information on vaccination schedules, deworming and external parasite control. Keep a copy of your pet’s vaccination records in your home or with you when you travel. Contact your veterinarian if you believe that your pet may be ill, injured, or if something just doesn’t seem right. Your veterinarian is the expert on keeping your dog healthy.  Work as a team with him or her.<br /></li>
+        <li style="text-align: justify;"><strong>PROVIDE AMPLE OPPORTUNITIES TO EXERCISE</strong><br /><br />Make sure your dog gets the regular exercise needed to enable it to be fit.  By being in shape, your dog will be more capable of participating in the activities that it enjoys.<br /></li>
+        <li style="text-align: justify;"><strong>COMMUNICATE WITH YOUR DOG AND DEVELOP A RELATIONSHIP</strong><br /><br />Dogs are social creatures and they need to interact with their owner. Quality time will help you get to know your dog and understand  particular needs that it might have, as well enhance your ability to recognize early signs of an illness that could be developing. In addition, time spent in developing a relationship will help prevent many undesirable behavioral patterns.<br /></li>
+        <li style="text-align: justify;"><strong>TRAIN YOUR DOG TO FOLLOW THE SIMPLE COMMANDS</strong><br /><br />Puppy and dog training classes can be very helpful. The better your dog is at following basic and necessary commands, the greater the chances are that your dog will live a safe and long life.<br /></li>
+        <li style="text-align: justify;"><strong>PRACTICE REPRODUCTIVE CONTROL</strong><br /><br />If you do not intend to create puppies, spaying or neutering is a certain option. If you plan to breed your dog or are opposed to spaying and neutering for other reasons, take appropriate measures to prevent mismatings. Consult with your veterinarian in regard to other options that are available.<br /></li>
+        <li style="text-align: justify;"><strong>DENTAL CARE IS VERY IMPORTANT</strong><br /><br />Many breeds are prone to gum disease, which can have serious implications. Infection resulting from this condition leads to premature tooth loss, and can commonly cause infections in major organs, including the heart valves.<br /></li>
+        <li style="text-align: justify;"><strong>DON’T OVERLOOK GROOMING AND NAIL TRIMMING</strong><br /><br />Long coated dogs are prone to developing matts and ice balls in their hair. Overgrown nails are common in elderly dogs and can make it more difficult for them to walk. In addition, such nails are much more prone to breaking, which can be quite painful.<br /></li>
+    </ol>
+</div>
+<br /><a class="btn btn-primary btn-group-lg" asp-page="Index">
+    <i class="fas fa-user">HomePage</i>
+</a>
