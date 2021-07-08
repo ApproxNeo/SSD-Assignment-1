@@ -44,11 +44,15 @@
 
     </style>
     <ul class="nav navbar-nav navbar-right">
-        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || SignInManager.IsSignedIn(User) && User.IsInRole("Product manager"))
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") ||
+          SignInManager.IsSignedIn(User) && User.IsInRole("Product manager")||
+          SignInManager.IsSignedIn(User) && User.IsInRole("Public Relation") ||
+          SignInManager.IsSignedIn(User) && User.IsInRole("Business Owner"))
         {
             <div class="dropdown">
                 <button class="dropbtn">For Admin Only</button>
                 <div class="dropdown-content">
+                    <a class="nav-link" asp-area="" asp-page="/Admin/Index">Home</a>
                     <a class="nav-link" asp-area="" asp-page="/Admin/Products/Index">Manage Products</a>
                     <a class="nav-link" asp-area="" asp-page="/Admin/Roles/Index">Manage Roles</a>
                     <a class="nav-link" asp-area="" asp-page="/Admin/Audits/Index">Logs</a>
