@@ -14,7 +14,7 @@ using SSD_Assignment_1.Models;
 
 namespace SSD_Assignment_1.Pages.Admin.Products
 {
-    [Authorize(Roles = "Product manager")]
+    [Authorize(Roles = "Product manager,Business Owner")]
 
     public class EditModel : PageModel
     {

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace SSD_Assignment_1.Pages.Admin
 {
-    [Authorize(Roles = "Admin, Product manager")]
+    [Authorize(Roles = "Admin, Product manager,Business Owner,Public Relation")]
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
