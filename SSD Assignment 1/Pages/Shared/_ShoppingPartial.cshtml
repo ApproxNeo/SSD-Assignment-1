@@ -2,59 +2,64 @@
 @using SSD_Assignment_1.Models;
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-    <style>
-        .dropbtn {
-            color: black;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            margin-left:10em;
-        }
+<style>
+    .dropbtn {
+        color: black;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+        margin-left: 10em;
+    }
 
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            margin-left: 10em;
-        }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        margin-left: 10em;
+    }
 
-            .dropdown-content a {
-                color: black;
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-            }
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
 
-                .dropdown-content a:hover {
-                    background-color: #f1f1f1
-                }
+    .dropdown-content a:hover {
+        background-color: #f1f1f1
+    }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || SignInManager.IsSignedIn(User) && User.IsInRole("Product manager"))
+{
+    <div class="dropdown p-1 m-1">
+        <a asp-page="/Admin/Index" class="dropbtn"><span >For Admin Only</span></a>        
+        <div class="dropdown-content">
+            <a class="nav-link" asp-area="" asp-page="/Admin/Products/Index">Manage Products</a>
+            <a class="nav-link" asp-area="" asp-page="/Admin/Roles/Index">Manage Roles</a>
+            <a class="nav-link" asp-area="" asp-page="/Admin/Audits/Index">Logs</a>
+            <hr />
+        </div>
+    </div>
+}
+<ul class="navbar-nav">   
 
-    </style>
-    <ul class="nav navbar-nav navbar-right">
-        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || SignInManager.IsSignedIn(User) && User.IsInRole("Product manager"))
-        {
-            <div class="dropdown">
-                <button class="dropbtn">For Admin Only</button>
-                <div class="dropdown-content">
-                    <a class="nav-link" asp-area="" asp-page="/Admin/Products/Index">Manage Products</a>
-                    <a class="nav-link" asp-area="" asp-page="/Admin/Roles/Index">Manage Roles</a>
-                    <a class="nav-link" asp-area="" asp-page="/Admin/Audits/Index">Logs</a>
-                </div>
-            </div>
-        }
-    </ul>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-page="/Cart/Index"><img src="~/images/shopping-cart.png" /></a>
+    </li>
+
+</ul>
 
 

@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Compile Remove="Data\ApplicationDbContext.cs" />
+    <Compile Remove="Migrations\20210711081852_UpdateCheckout.cs" />
+    <Compile Remove="Migrations\20210711081852_UpdateCheckout.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +23,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="Stripe.net" Version="39.57.0" />
     <PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.6.0" />
   </ItemGroup>
 

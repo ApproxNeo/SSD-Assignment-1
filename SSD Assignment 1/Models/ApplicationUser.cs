@@ -11,6 +11,7 @@ namespace SSD_Assignment_1.Models
         public string FullName { get; set; }
         public DateTime BirthDate { get; set; }
         public int Age { get; set; }
+        public string StripeId { get; set; }
 
     }
 }

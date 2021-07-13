@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SSD_Assignment_1.Data;
 using SSD_Assignment_1.Models;
+using Stripe;
 
 namespace SSD_Assignment_1
 {
@@ -116,6 +117,8 @@ namespace SSD_Assignment_1
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            StripeConfiguration.ApiKey = "sk_test_51JBK5eHn9TQEqDEm3YLtX4izFQsOJrEpj1aVxtibQ9dWLiYyIx6DVkq5fMTNkIZclnQ7tfG2NyYbnvbCsrDC6HAZ00RsSK48uQ";
 
             app.UseNotyf();
             app.UseHttpsRedirection();

@@ -30,6 +30,7 @@ namespace SSD_Assignment_1.Data
         public DbSet<SSD_Assignment_1.Models.Audit> AuditLogs { get; set; }
 
         public DbSet<SSD_Assignment_1.Models.CartItem> CartItems { get; set; }
+        public DbSet<SSD_Assignment_1.Models.Order> Order { get; set; }
 
         public virtual async Task<int> SaveAudit(string userId = null)
         {

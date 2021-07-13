@@ -1,0 +1,60 @@
+﻿@page
+@model SSD_Assignment_1.Pages.Orders.IndexModel
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<h1>Your Orders</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].OrderDetails)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].DeliveryAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].PaymentStatus)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Order)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDetails)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentStatus)
+                </td>
+                @{
+
+                    if (item.PaymentStatus == "Unpaid")
+                    {
+                        <td>
+                            <form method="post" action="~/Payment/Index">
+                                <input type="hidden" value="@item.OrderId" asp-for="OrderId"/>
+                                <input type="submit" />
+                            </form>
+                        </td>
+
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>

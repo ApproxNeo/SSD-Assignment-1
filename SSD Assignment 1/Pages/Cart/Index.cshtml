@@ -36,9 +36,9 @@ else
                         @Html.DisplayFor(modelItem => Model.Products[i].Name)
                     </td>
                     <td>
-                        <form method="post">
-                            <input type="hidden" value=@Model.Products[i].Id asp-for="QChange.ProductId">
-                            <input type="number" class="input-field" value=@Model.Carts[i].Quantity asp-for="QChange.NQuantity" onchange="javascript:this.form.submit()">
+                        <form method="post" asp-page-handler="QtyChange">
+                            <input type="hidden" value=@Model.Products[i].Id asp-for="QtyChange.ProductId">
+                            <input type="number" class="input-field" value=@Model.Carts[i].Quantity asp-for="QtyChange.NQuantity" onchange="javascript:this.form.submit()">
                         </form>
 
                     </td>
@@ -73,6 +73,18 @@ else
             </tr>
         </tbody>
     </table>
+
+    <div class="row">
+        <div class="col-8">
+
+        </div>
+        <div class="col-4">
+            <form asp-page-handler="Checkout">
+                <input type="submit" />
+            </form>
+           
+        </div>
+    </div>
 }
 
 

@@ -1,0 +1,118 @@
+﻿@page
+@model SSD_Assignment_1.Pages.Payment.IndexModel
+
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<script src="https://js.stripe.com/v3/"></script>
+<link rel="stylesheet" href="~/css/stripe.css" />
+
+<div class="text-center">
+    <h1 class="display-4">Cesar's Creatures</h1>
+    <p>Home for the pets</p>
+</div>
+
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        You have a payment of @Model.order.Price due
+    </div>
+</div> 
+
+
+@{
+    if (!(Model.HasReuseable))
+    {
+        <div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <div id="payment-form" class="stripe">
+                        <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+                        <button onclick="submitQuery()">
+                            <div class="spinner hidden" id="spinner"></div>
+                            <span id="button-text">Pay now</span>
+                        </button>
+                        <p id="card-errors" role="alert"></p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        <script>
+    var stripe = Stripe('pk_test_51JBK5eHn9TQEqDEmfofvLI4iTYStPMErJIKLjsigazr7PsCZkvblOZRkSrXLBhpdlnHi31Hda0E3ScbMuy0JFHS400rdCBX7rX');
+    var elements = stripe.elements();
+
+    var style = {
+        base: {
+            color: "#32325d",
+        }
+    };
+
+    var card = elements.create("card", { style: style });
+    card.mount("#card-element");
+
+    card.on('change', function (event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+            displayError.textContent = event.error.message;
+        } else {
+            displayError.textContent = '';
+        }
+    });
+
+
+    function submitQuery() {
+        stripe.confirmCardPayment("@Model.ClientSecret", {
+        payment_method: {
+            card: card,
+            billing_details: {
+                name: 'Jenny Rosen'
+            }
+        },
+        setup_future_usage: 'off_session'
+    }).then(function (result) {
+        if (result.error) {
+            // Show error to your customer
+            var displayError = document.getElementById('card-errors');
+            displayError.textContent = event.error.message;
+            console.log(result.error.message);
+        } else {
+            if (result.paymentIntent.status === 'succeeded') {
+                // Show a success message to your customer
+                // There's a risk of the customer closing the window before callback execution
+                // Set up a webhook or plugin to listen for the payment_intent.succeeded event
+                // to save the card to a Customer
+
+                // The PaymentMethod ID can be found on result.paymentIntent.payment_method
+            }
+        }
+    })
+
+    };
+        </script>
+
+    }
+    else
+    {
+        <div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <p>Would you want to use your credit card ending with @Html.DisplayFor(model => model.Last4)</p>
+                    <form asp-page-handler="Reuse">
+                        <input type="hidden" value=@Model.OrderId asp-for="OrderId" />
+                        <input type="submit" />
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    }
+}

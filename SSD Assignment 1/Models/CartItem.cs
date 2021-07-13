@@ -13,7 +13,7 @@ namespace SSD_Assignment_1.Models
 
         public string UserId { get; set; }
 
-        public string ProductId { get; set; }
+        public int ProductId { get; set; }
 
         public int Quantity { get; set; }
 

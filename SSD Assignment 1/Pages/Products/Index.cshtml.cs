@@ -34,7 +34,7 @@ namespace SSD_Assignment_1.Pages.Products
             Product = await _context.Product.ToListAsync();
         }
 
-        public async Task<IActionResult> OnPostAsync(string ProductId)
+        public async Task<IActionResult> OnPostAsync(int? ProductId)
         {
             Product = await _context.Product.ToListAsync();
 
@@ -58,12 +58,15 @@ namespace SSD_Assignment_1.Pages.Products
             {
                 _context.Add(new CartItem()
                 {
-                    ProductId = ProductId,
+                    ProductId = (int)ProductId,
                     UserId = UserId,
                     Quantity = 1
                 });
                 await _context.SaveChangesAsync();
                 _notyf.Success("Item added to cart!");
+
+              
+
                 return Page();
             }
 
