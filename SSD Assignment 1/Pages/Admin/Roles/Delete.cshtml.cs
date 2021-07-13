@@ -10,7 +10,7 @@ using SSD_Assignment_1.Models;
 
 namespace SSD_Assignment_1.Pages.Admin.Roles
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Business Owner")]
     public class DeleteModel : PageModel
     {
         private readonly RoleManager<ApplicationRole> _roleManager;

@@ -38,28 +38,26 @@
         background-color: #f1f1f1
     }
 
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-</style>
-@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || SignInManager.IsSignedIn(User) && User.IsInRole("Product manager"))
-{
-    <div class="dropdown p-1 m-1">
-        <a asp-page="/Admin/Index" class="dropbtn"><span >For Admin Only</span></a>        
-        <div class="dropdown-content">
-            <a class="nav-link" asp-area="" asp-page="/Admin/Products/Index">Manage Products</a>
-            <a class="nav-link" asp-area="" asp-page="/Admin/Roles/Index">Manage Roles</a>
-            <a class="nav-link" asp-area="" asp-page="/Admin/Audits/Index">Logs</a>
-            <hr />
-        </div>
-    </div>
-}
-<ul class="navbar-nav">   
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
 
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-page="/Cart/Index"><img src="~/images/shopping-cart.png" /></a>
-    </li>
-
-</ul>
+    </style>
+    <ul class="nav navbar-nav navbar-right">
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") || 
+             SignInManager.IsSignedIn(User) && User.IsInRole("Product manager") ||
+             SignInManager.IsSignedIn(User) && User.IsInRole("Public Relation") ||
+             SignInManager.IsSignedIn(User) && User.IsInRole("Business Owner"))
+        {
+            <div class="dropdown">
+                <button class="dropbtn">For Admin Only</button>
+                <div class="dropdown-content">
+                    <a class="nav-link" asp-area="" asp-page="/Admin/Products/Index">Manage Products</a>
+                    <a class="nav-link" asp-area="" asp-page="/Admin/Roles/Index">Manage Roles</a>
+                    <a class="nav-link" asp-area="" asp-page="/Admin/Audits/Index">Logs</a>
+                </div>
+            </div>
+        }
+    </ul>
 
 
