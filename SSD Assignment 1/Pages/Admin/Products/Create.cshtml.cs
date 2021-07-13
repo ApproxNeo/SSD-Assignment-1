@@ -53,7 +53,7 @@ namespace SSD_Assignment_1.Pages.Admin.Products
 
             if (Photo is null)
             {
-                Product.PhotoPath = "NoImage.jpg";
+                Product.PhotoPath = "NoImage.png";
             }
             else
             {

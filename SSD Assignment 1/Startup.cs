@@ -107,7 +107,7 @@ namespace SSD_Assignment_1
             {
                app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-                app.UseStatusCodePages("text/html", "<h1>Oops,seems like page cannot be found!</h1><h1>Status code page</h1> <h2>Status Code: {0}</h2>");
+                app.UseStatusCodePages("text/html", "<h1>Oops,seems like the page could not be found!</h1><h1>Status code page</h1> <h2>Status Code: {0}</h2>");
                 app.UseExceptionHandler("/Error");
             }
             else
@@ -118,7 +118,7 @@ namespace SSD_Assignment_1
                 app.UseHsts();
             }
 
-            StripeConfiguration.ApiKey = "sk_test_51JBK5eHn9TQEqDEm3YLtX4izFQsOJrEpj1aVxtibQ9dWLiYyIx6DVkq5fMTNkIZclnQ7tfG2NyYbnvbCsrDC6HAZ00RsSK48uQ";
+            StripeConfiguration.ApiKey = Environment.GetEnvironmentVariable("STRIPE_KEY");
 
             app.UseNotyf();
             app.UseHttpsRedirection();

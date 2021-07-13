@@ -40,9 +40,12 @@ namespace SSD_Assignment_1.Pages.Payment
         public bool HasReuseable { get; set; }
         [BindProperty]
         public string Last4 { get; set; }
+        [BindProperty]
+        public string PUBLISHABLE_KEY { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
+
             string UserId = User?.FindFirst(ClaimTypes.NameIdentifier).Value;
             ApplicationUser user = await _userManager.GetUserAsync(User);
 
@@ -66,6 +69,8 @@ namespace SSD_Assignment_1.Pages.Payment
                 Customer = user.StripeId,
                 Type = "card",
             };
+
+            PUBLISHABLE_KEY = Environment.GetEnvironmentVariable("PUBLISHABLE_KEY");
 
             var methodsService = new PaymentMethodService();
             var paymentMethods = methodsService.List(options).ToList();
