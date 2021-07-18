@@ -4,9 +4,38 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-
-
+<style>
+    #filtering{
+        margin:1em;
+        border:1px solid black;
+        text-align:center;
+    }
+    select{
+        margin:0.5em;
+    }
+    input[type=text] {
+        margin: 0.5em;
+    }
+    input[type=submit] {
+        margin: 0.5em;
+    }
+</style>
+<div id="filtering">
+    <form>
+        <p>
+            <input type="text" asp-for="SearchString" size=50 placeholder="Search for a product for your pet!" />
+            <br />
+            <select asp-for="SearchGenre" asp-items="Model.Genres">
+                <option value="">Genre</option>
+            </select>
+            <select asp-for="SearchBrand" asp-items="Model.Brands">
+                <option value="">Brand</option>
+            </select>
+            <br />
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
+</div>
 <div class="card-deck">
     @foreach (var item in Model.Product)
     {
