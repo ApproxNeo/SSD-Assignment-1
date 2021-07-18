@@ -44,26 +44,43 @@
 </style>
 
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin") ||
-    SignInManager.IsSignedIn(User) && User.IsInRole("Product manager") ||
-    SignInManager.IsSignedIn(User) && User.IsInRole("Public Relation") ||
-    SignInManager.IsSignedIn(User) && User.IsInRole("Business Owner"))
+  SignInManager.IsSignedIn(User) && User.IsInRole("Product manager") ||
+  SignInManager.IsSignedIn(User) && User.IsInRole("Public Relation") ||
+  SignInManager.IsSignedIn(User) && User.IsInRole("Business Owner"))
 {
-<div class="dropdown p-3">
-    <a class="dropbtn" asp-page="/Admin/Index"><span>For Admins Only</span></a>
-    <div class="dropdown-content">
-        <a class="nav-link" asp-area="" asp-page="/Admin/Products/Index">Manage Products</a>
-        <a class="nav-link" asp-area="" asp-page="/Admin/Roles/Index">Manage Roles</a>
-        <a class="nav-link" asp-area="" asp-page="/Admin/Audits/Index">Logs</a>
-        <a class="nav-link" asp-area="" asp-page="/Admin/Orders/Index">Orders</a>
-        <hr />
+    <div class="dropdown p-3">
+        <a class="dropbtn" asp-page="/Admin/Index"><span>For Admins Only</span></a>
+        <div class="dropdown-content">
+            <a class="nav-link" asp-area="" asp-page="/Admin/Products/Index">Manage Products</a>
+            <a class="nav-link" asp-area="" asp-page="/Admin/Roles/Index">Manage Roles</a>
+            <a class="nav-link" asp-area="" asp-page="/Admin/Audits/Index">Logs</a>
+            <a class="nav-link" asp-area="" asp-page="/Admin/Orders/Index">Orders</a>
+            <hr />
+        </div>
     </div>
-</div>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Cart/Index"><img src="~/images/shopping-cart.png" /></a>
+        </li>
+    </ul>
+}
+else if (SignInManager.IsSignedIn(User))
+{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/Cart/Index"><img src="~/images/shopping-cart.png" /></a>
+        </li>
+    </ul>
+}
+else if (!SignInManager.IsSignedIn(User))
+{
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><img src="~/images/shopping-cart.png" /></a>
+        </li>
+    </ul>
 }
 
-<ul class="navbar-nav">
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-page="/Cart/Index"><img src="~/images/shopping-cart.png" /></a>
-    </li>
-</ul>
+
 
 
