@@ -45,8 +45,8 @@
 
 
         <script>
-    var stripe = Stripe('pk_test_51JBK5eHn9TQEqDEmfofvLI4iTYStPMErJIKLjsigazr7PsCZkvblOZRkSrXLBhpdlnHi31Hda0E3ScbMuy0JFHS400rdCBX7rX');
-    var elements = stripe.elements();
+    var stripe = Stripe(@Model.PUBLISHABLE_KEY);
+   var elements = stripe.elements();
 
     var style = {
         base: {
