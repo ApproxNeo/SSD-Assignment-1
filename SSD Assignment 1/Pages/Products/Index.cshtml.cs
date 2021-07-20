@@ -74,7 +74,7 @@ namespace SSD_Assignment_1.Pages.Products
 
             if (!User.Identity.IsAuthenticated)
             {
-                _notyf.Information("Log in to access our services");
+                _notyf.Information("Register an account to start shopping with us!");
                 return Redirect("/Identity/Account/Register");
             }
 

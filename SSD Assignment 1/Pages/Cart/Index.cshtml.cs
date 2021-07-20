@@ -25,13 +25,17 @@ namespace SSD_Assignment_1.Pages.Cart
         private readonly ILogger<IndexModel> _logger;
         private readonly Data.SSD_Assignment_1Context _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly INotyfService _notyf;
 
 
-        public IndexModel(ILogger<IndexModel> logger, Data.SSD_Assignment_1Context context, UserManager<ApplicationUser> userManager)
+        public IndexModel(ILogger<IndexModel> logger, Data.SSD_Assignment_1Context context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, INotyfService notyf)
         {
             _logger = logger;
             _context = context;
             _userManager = userManager;
+            _signInManager = signInManager;
+            _notyf = notyf;
         }
         public IQueryable<SSD_Assignment_1.Models.CartItem> CartQuery;
         public IList<CartItem> Carts;
@@ -39,6 +43,11 @@ namespace SSD_Assignment_1.Pages.Cart
 
         public async Task<IActionResult> OnGetAsync()
         {
+            if (!(_signInManager.IsSignedIn(User)))
+            {
+                _notyf.Information("Register an account to start shopping with us!");
+                return Redirect("/Identity/Account/Register");
+            }
 
             string UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
