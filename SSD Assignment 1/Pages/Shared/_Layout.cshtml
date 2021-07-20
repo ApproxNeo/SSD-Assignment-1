@@ -1,10 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using SSD_Assignment_1.Models;
-<!--error-->
-@inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -34,13 +28,13 @@
                     <div class="navbar-nav row align-content-center">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search for Products">
+                                <form class="input-group" method="post" asp-page="~/Products/Index">
+                                    <input type="text" class="form-control" placeholder="Search for Products" id="search" >
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">Search</button>
+                                        <button class="btn btn-outline-secondary" type="button" onclick="window.location.replace('Products/Index?SearchString=' + document.getElementById('search').value);">Search</button>
                                     </div>
-                                </div>
-                                
+                                </form>
+
 
                             </li>
 
@@ -53,7 +47,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Products/Index">Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="/Index">Tips N' Tricks</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/petguide">Tips N' Tricks</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Index">Adopt-a-pet!</a>

@@ -5,56 +5,63 @@
     ViewData["Title"] = "Index";
 }
 <style>
-    #filtering{
-        margin:1em;
-        border:1px solid black;
-        text-align:center;
+    #filtering {
+        margin: 1em;
+        border: 1px solid black;
+        text-align: center;
     }
-    select{
-        margin:0.5em;
-    }
-    input[type=text] {
+
+    select {
         margin: 0.5em;
     }
+
     input[type=submit] {
         margin: 0.5em;
     }
 </style>
-<div id="filtering">
-    <form>
-        <p>
-            <input type="text" asp-for="SearchString" size=50 placeholder="Search for a product for your pet!" />
-            <br />
-            <select asp-for="SearchGenre" asp-items="Model.Genres">
-                <option value="">Genre</option>
-            </select>
-            <select asp-for="SearchBrand" asp-items="Model.Brands">
-                <option value="">Brand</option>
-            </select>
-            <br />
-            <input type="submit" value="Filter" />
-        </p>
-    </form>
-</div>
-<div class="card-deck">
-    @foreach (var item in Model.Product)
-    {
-        <div class="card mb-3" style="max-width: 15rem; min-width: 15rem;">
-            <img style="height:200px; width:auto;"class="card-img-top" src="~/images/@item.PhotoPath" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h5>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Price)</p>
-                <form method="post">
-                    <input type="hidden" name="ProductID" value=@item.Id >
-                    <input class="btn btn-primary" type="submit" value="Add to cart" />
-                </form>
-                
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">@Html.DisplayFor(modelItem => item.Brand)</small>
-            </div>
-        </div>
-    }
+<div class="row">
+    <div id="filtering" class="col-2">
+        <form>
+            <p>
+                <input type="text" asp-for="SearchString" size=10 placeholder="Search for a product for your pet!" />
+                <br />
+                <select asp-for="SearchGenre" asp-items="Model.Genres">
+                    <option value="">Genre</option>
+                </select>
+                <select asp-for="SearchBrand" asp-items="Model.Brands">
+                    <option value="">Brand</option>
+                </select>
+                <br />
+                <input type="submit" value="Filter" />
+            </p>
+        </form>
+    </div>
+    <div class="card-deck col-9">
+        @foreach (var item in Model.Product)
+        {
+            <a onclick="window.location.replace('Products/Details?id=' + @item.Id)" id="carditem">
+                <div class="card mb-3" style="width: 11rem;">
+                    <img style="height:150px; width:auto;" class="card-img-top" src="~/images/@item.PhotoPath" alt="Image not found">
+                    <div class="card-body">
+                        <h6 class="card-title"> @Html.DisplayFor(modelItem => item.Name)</h6>
+                        <h6 class="card-text">@Html.DisplayFor(modelItem => item.Price)</h6>
+                        <form method="post">
+                            <input type="hidden" name="ProductID" value=@item.Id>
+                            <input class="btn btn-primary" type="submit" value="Add to cart" />
+                        </form>
+
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">@Html.DisplayFor(modelItem => item.Brand)</small>
+                    </div>
+                </div>
+            </a>
+
+        }
+    </div>
+
+
 </div>
 
-  
+
+
