@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <Compile Remove="Data\ApplicationDbContext.cs" />
-    <Compile Remove="Migrations\20210711081852_UpdateCheckout.cs" />
-    <Compile Remove="Migrations\20210711081852_UpdateCheckout.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
