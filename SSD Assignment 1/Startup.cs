@@ -107,7 +107,7 @@ namespace SSD_Assignment_1
             {
                app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-                app.UseStatusCodePages("text/html", "<h1>Oops,seems like the page could not be found!</h1><h1>Status code page</h1> <h2>Status Code: {0}</h2>");
+                app.UseStatusCodePages("text/html", "<h1>Oops,seems like the page could not be found!</h1>");
                 app.UseExceptionHandler("/Error");
             }
             else
