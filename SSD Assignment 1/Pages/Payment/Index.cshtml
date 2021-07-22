@@ -18,7 +18,7 @@
     <div class="col-4">
         You have a payment of @Model.order.Price due
     </div>
-</div> 
+</div>
 
 
 @{
@@ -45,7 +45,7 @@
 
 
         <script>
-    var stripe = Stripe(@Model.PUBLISHABLE_KEY);
+    var stripe = Stripe("@Model.PUBLISHABLE_KEY");
    var elements = stripe.elements();
 
     var style = {
