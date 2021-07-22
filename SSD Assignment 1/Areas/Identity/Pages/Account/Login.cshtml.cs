@@ -97,7 +97,7 @@ namespace SSD_Assignment_1.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Incorrect email or password.");
                     return Page();
                 }
             }
