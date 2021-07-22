@@ -68,11 +68,11 @@ namespace SSD_Assignment_1
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings
-                options.Password.RequireDigit = false;
+                options.Password.RequireDigit = true;
                 options.Password.RequiredLength = 5;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
                 options.Password.RequiredUniqueChars = 1;
 
                 // Lockout settings
@@ -107,7 +107,7 @@ namespace SSD_Assignment_1
             {
                app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-                app.UseStatusCodePages("text/html", "<h1>Oops,seems like the page could not be found!</h1><h1>Status code page</h1> <h2>Status Code: {0}</h2>");
+                app.UseStatusCodePages("text/html", "<h1>Oops,seems like the page could not be found!</h1>");
                 app.UseExceptionHandler("/Error");
             }
             else
