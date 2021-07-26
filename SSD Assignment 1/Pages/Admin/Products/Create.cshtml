@@ -7,11 +7,13 @@
 
 <h1>Create</h1>
 
-<h4>Product</h4>
+<h4>Add a Product</h4>
+<h6 class="alert-warning">Remember to follow guidelines, all changes are auditted &#x26A0</h6>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data">
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Product.Name" class="control-label"></label>
@@ -33,11 +35,7 @@
                 <input asp-for="Product.Animal" class="form-control" />
                 <span asp-validation-for="Product.Animal" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Product.Description" class="control-label"></label>
-                <input asp-for="Product.Description" class="form-control" />
-                <span asp-validation-for="Product.Description" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="Product.Price" class="control-label"></label>
                 <input asp-for="Product.Price" class="form-control" />
@@ -47,31 +45,38 @@
                 <label asp-for="Photo" class="control-label"></label>
                 <div class="custom-file">
                     <input asp-for="Photo" class="custom-file-input form-control" />
-                    <label class="custom-file-label">Click here to change photo</label>
+                    <label class="custom-file-label">Click here to upload photo</label>
                 </div>
             </div>
+        </div>
 
-            
-            <script>
-                $(document).ready(function () {
-                    $('.custom-file-input').on("change", function () {
-                        console.log("Changed")
-                        var fileName = $(this).val().split('\\').pop();
-                        $('.custom-file-label').html(fileName);
-                    });
-                })
-            </script>
-            
+        <div class="col-md-5">
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Product.Description" class="control-label"></label>
+                <textarea asp-for="Product.Description" class="form-control" rows="20"></textarea>
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
             </div>
-        </form>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
     </div>
-</div>
+</form>
+
 
 <div>
     <a asp-page="Index">Back to List</a>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('.custom-file-input').on("change", function () {
+            var fileName = $(this).val().split('\\').pop();
+            $('.custom-file-label').html(fileName);
+        });
+    })
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -11,6 +11,14 @@
     <h4>Product</h4>
     <hr />
     <dl class="row">
+        <div class="card mb-3 col-sm-5" style="width: 28rem;">
+            <img style="height:300px; width:auto;" class="card-img-top" src="~/images/@Model.Product.PhotoPath" alt="Image not found">
+
+            <div class="card-footer">
+                <small class="text-muted">@Html.DisplayFor(model => model.Product.Brand)</small>
+            </div>
+        </div>
+        <div class="col-sm-7"></div>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Product.Name)
         </dt>

@@ -24,10 +24,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Product[0].Animal)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product[0].Description)
-            </th>
+            </th>            
             <th>
                 @Html.DisplayNameFor(model => model.Product[0].Price)
             </th>
@@ -50,10 +47,7 @@
                 @Html.DisplayFor(modelItem => item.Animal)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                $ @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
@@ -61,7 +55,7 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-        <b>@Html.DisplayFor(modelItem => item.PhotoPath)</b>
+        
 }
     </tbody>
 </table>

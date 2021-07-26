@@ -22,6 +22,7 @@ namespace SSD_Assignment_1.Pages.Products
             _context = context;
         }
 
+        [BindProperty]
         public Product Product { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)

@@ -7,11 +7,13 @@
 
 <h1>Edit</h1>
 
-<h4>Product</h4>
+<h4>Edit Product Detail</h4>
+<h6 class="alert-warning">Remember to follow guidelines, all changes are auditted &#x26A0</h6>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-4">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Product.Id" />
             <div class="form-group">
@@ -35,25 +37,47 @@
                 <span asp-validation-for="Product.Animal" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Product.Description" class="control-label"></label>
-                <input asp-for="Product.Description" class="form-control" />
-                <span asp-validation-for="Product.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Product.Price" class="control-label"></label>
                 <input asp-for="Product.Price" class="form-control" />
                 <span asp-validation-for="Product.Price" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="Photo" class="custom-file-input form-control" />
+                    <label class="custom-file-label">Click here to upload photo</label>
+                </div>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-        </form>
+
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="Product.Description" class="control-label"></label>
+                <textarea asp-for="Product.Description" class="form-control" rows="20"></textarea>
+                <span asp-validation-for="Product.Description" class="text-danger"></span>
+            </div>
+        </div>
     </div>
-</div>
+
+</form>
 
 <div>
     <a asp-page="./Index">Back to List</a>
 </div>
+
+<script>
+    $(document).ready(function () {
+
+        //document.getElementsByClassName('custom-file-input')[0].value = null;
+        $('.custom-file-input').on("change", function () {
+            var fileName = $(this).val().split('\\').pop();
+            $('.custom-file-label').html(fileName);
+        });
+    })
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

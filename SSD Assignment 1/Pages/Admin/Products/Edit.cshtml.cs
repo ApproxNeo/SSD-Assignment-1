@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -31,6 +33,9 @@ namespace SSD_Assignment_1.Pages.Admin.Products
         [BindProperty]
         public Product Product { get; set; }
 
+        [BindProperty]
+        public IFormFile Photo { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
@@ -56,11 +61,19 @@ namespace SSD_Assignment_1.Pages.Admin.Products
                 return Page();
             }
 
-            //_context.Attach(Product).State = EntityState.Modified;
             var oldProduct = await _context.Product.FindAsync(Product.Id);
+
+            if (Photo == null)
+            {
+                Console.WriteLine("is null");
+                Product.PhotoPath = oldProduct.PhotoPath;
+            } else
+            {
+                Console.WriteLine("not null");
+                Product.PhotoPath = GenerateName();
+            }
+
             _context.Entry(oldProduct).CurrentValues.SetValues(Product);
-
-
 
             try
             {
@@ -80,6 +93,23 @@ namespace SSD_Assignment_1.Pages.Admin.Products
 
             _notyf.Success("Product updated successfully!");
             return RedirectToPage("./Index");
+        }
+
+        private string GenerateName()
+        {
+            string uniqueName = null;
+            if (Photo != null)
+            {
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
+                uniqueName = Guid.NewGuid().ToString() + "_" + Photo.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueName);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    Photo.CopyTo(fileStream);
+                }
+            }
+
+            return uniqueName;
         }
 
         private bool ProductExists(int id)

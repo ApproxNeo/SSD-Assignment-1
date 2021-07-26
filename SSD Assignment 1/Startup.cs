@@ -93,7 +93,7 @@ namespace SSD_Assignment_1
                 // options.AccessDeniedPath = "/Account/AccessDenied";
 
                 options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromSeconds(500);
+                options.ExpireTimeSpan = TimeSpan.FromSeconds(1200);
                 options.SlidingExpiration = true;
             });
 
@@ -117,7 +117,7 @@ namespace SSD_Assignment_1
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
+            
             StripeConfiguration.ApiKey = Environment.GetEnvironmentVariable("STRIPE_KEY");
 
             app.UseNotyf();

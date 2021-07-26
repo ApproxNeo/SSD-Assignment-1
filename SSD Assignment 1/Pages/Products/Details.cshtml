@@ -10,48 +10,61 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Product</h4>
+    <h4>Product Information</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Brand)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Brand)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Genre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Genre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Animal)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Animal)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Description)
-        </dt>
-        <dd class="col-sm-10">
-            <b>Markdown starts here</b>
-            <markdown markdown="@Model.Product.Description" />
-            
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Product.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Product.Price)
-        </dd>
+        <div class="col-sm-5 shado">
+            <div class="card mb-3" style="width: 28rem;">
+                <img style="height:300px; width:auto;" class="card-img-top" src="~/images/@Model.Product.PhotoPath" alt="Image not found">
+
+                <div class="card-footer">
+                    <small class="text-muted">@Html.DisplayFor(model => model.Product.Brand)</small>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-6">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Brand)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Brand)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Genre)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Genre)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Product.Animal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Animal)
+            </dd>
+            <dt class="col-sm-1">
+                @Html.DisplayNameFor(model => model.Product.Price)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Product.Price)
+            </dd>
+        </div>
     </dl>
+    <h4>Product Description</h4>
+    <hr />
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <markdown markdown="@Model.Product.Description" sanitize-html="true" />
+        </div>
+    </div>
 </div>
 <div>
     <a asp-page="./Index">Back</a>
