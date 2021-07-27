@@ -7,6 +7,9 @@
     "mssql2": {
       "type": "mssql.local",
       "connectionId": "SSD_Assignment_1Context"
+    },
+    "secrets1": {
+      "type": "secrets.user"
     }
   }
 }

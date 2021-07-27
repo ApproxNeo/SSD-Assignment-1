@@ -10,13 +10,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SSD_Assignment_1.Data;
 using SSD_Assignment_1.Models;
+using SSD_Assignment_1.Services;
 using Stripe;
+using WebPWrecover.Services;
 
 namespace SSD_Assignment_1
 {
@@ -82,7 +85,14 @@ namespace SSD_Assignment_1
 
                 // User settings
                 options.User.RequireUniqueEmail = true;
+
+                //email verification
+                options.SignIn.RequireConfirmedAccount = true;
             });
+
+            //sending confirmation email
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.ConfigureApplicationCookie(options =>
             {
