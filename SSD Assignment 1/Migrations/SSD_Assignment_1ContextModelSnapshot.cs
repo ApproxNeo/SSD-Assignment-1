@@ -274,7 +274,7 @@ namespace SSD_Assignment_1.Migrations
 
             modelBuilder.Entity("SSD_Assignment_1.Models.AuditRoles", b =>
                 {
-                    b.Property<int>("Audit_ID")
+                    b.Property<int>("AuditId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -294,7 +294,7 @@ namespace SSD_Assignment_1.Migrations
                     b.Property<string>("PerformedById")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Audit_ID");
+                    b.HasKey("AuditId");
 
                     b.ToTable("AuditRecords");
                 });

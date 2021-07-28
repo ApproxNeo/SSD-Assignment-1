@@ -10,8 +10,8 @@ using SSD_Assignment_1.Data;
 namespace SSD_Assignment_1.Migrations
 {
     [DbContext(typeof(SSD_Assignment_1Context))]
-    [Migration("20210728160429_AddAuditRole")]
-    partial class AddAuditRole
+    [Migration("20210728162700_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -276,7 +276,7 @@ namespace SSD_Assignment_1.Migrations
 
             modelBuilder.Entity("SSD_Assignment_1.Models.AuditRoles", b =>
                 {
-                    b.Property<int>("Audit_ID")
+                    b.Property<int>("AuditId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -296,7 +296,7 @@ namespace SSD_Assignment_1.Migrations
                     b.Property<string>("PerformedById")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Audit_ID");
+                    b.HasKey("AuditId");
 
                     b.ToTable("AuditRecords");
                 });
