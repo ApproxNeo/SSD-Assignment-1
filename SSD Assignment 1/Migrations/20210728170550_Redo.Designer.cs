@@ -10,8 +10,8 @@ using SSD_Assignment_1.Data;
 namespace SSD_Assignment_1.Migrations
 {
     [DbContext(typeof(SSD_Assignment_1Context))]
-    [Migration("20210728162700_Initial")]
-    partial class Initial
+    [Migration("20210728170550_Redo")]
+    partial class Redo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
