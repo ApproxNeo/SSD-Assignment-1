@@ -39,7 +39,12 @@ namespace SSD_Assignment_1
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                //.AddEntityFrameworkStores<SSD_Assignment_1Context>();
+            //.AddEntityFrameworkStores<SSD_Assignment_1Context>();
+
+            //sending confirmation email
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
+
             services.AddRazorPages();
 
             services.AddDbContext<SSD_Assignment_1Context>(options =>
@@ -90,9 +95,6 @@ namespace SSD_Assignment_1
                 options.SignIn.RequireConfirmedAccount = true;
             });
 
-            //sending confirmation email
-            services.AddTransient<IEmailSender, EmailSender>();
-            services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.ConfigureApplicationCookie(options =>
             {
