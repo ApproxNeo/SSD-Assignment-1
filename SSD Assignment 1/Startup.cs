@@ -40,12 +40,22 @@ namespace SSD_Assignment_1
                     Configuration.GetConnectionString("DefaultConnection")));
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //.AddEntityFrameworkStores<SSD_Assignment_1Context>();
-
+            
             //sending confirmation email
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
 
             services.AddRazorPages();
+
+            services.AddAuthentication()
+        .AddGoogle(options =>
+        {
+            IConfigurationSection googleAuthNSection =
+                Configuration.GetSection("Authentication:Google");
+
+            options.ClientId = googleAuthNSection["ClientId"];
+            options.ClientSecret = googleAuthNSection["ClientSecret"];
+        });
 
             services.AddDbContext<SSD_Assignment_1Context>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SSD_Assignment_1Context")));
@@ -110,6 +120,7 @@ namespace SSD_Assignment_1
             });
 
 
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
