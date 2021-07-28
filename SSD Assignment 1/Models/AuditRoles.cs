@@ -10,7 +10,7 @@ namespace SSD_Assignment_1.Models
     {
 
         [Key]
-        public int Audit_ID { get; set; }
+        public int AuditId { get; set; }
 
         [Display(Name = "Audit Action")]
         public string AuditActionType { get; set; }
