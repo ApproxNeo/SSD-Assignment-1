@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <Compile Remove="Data\ApplicationDbContext.cs" />
+    <Compile Remove="Migrations\20210718084824_AddIdentitySchema.cs" />
+    <Compile Remove="Migrations\20210718084824_AddIdentitySchema.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
