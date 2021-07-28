@@ -31,8 +31,4 @@
     <PackageReference Include="Westwind.AspNetCore.Markdown" Version="3.6.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Migrations\" />
-  </ItemGroup>
-
 </Project>
