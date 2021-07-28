@@ -29,7 +29,7 @@ namespace WebPWrecover.Services
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("cesars.creatures@gmail.com", Options.SendGridUser),
+                From = new EmailAddress("cesars.creatures@outlook.com", Options.SendGridUser),
                 Subject = subject,
                 PlainTextContent = message,
                 HtmlContent = message
