@@ -98,8 +98,8 @@ namespace SSD_Assignment_1.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    //problem: An object reference is required for the non-static field, method, or property 'IEmailSender.SendEmailAsync(string, string, string)
-                    await IEmailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //problem: email not sending
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
