@@ -23,24 +23,21 @@
                     </button>
                 </div>
 
-
                 <div class="col-9">
                     <div class="navbar-nav row align-content-center">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <form class="input-group" method="post" asp-page="~/Products/Index">
-                                    <input type="text" class="form-control" placeholder="Search for Products" id="search" >
+                                <form class="input-group" method="post">
+                                    <input type="text" class="form-control" placeholder="Search for Products" id="SearchString" name="SearchString">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="window.location.replace('Products/Index?SearchString=' + document.getElementById('search').value);">Search</button>
+                                        <button class="btn btn-outline-secondary" type="button" onclick="javascript: var url = '/Products?SearchString=' + document.getElementById('SearchString').value; window.location.href = url;" >Search</button>
                                     </div>
                                 </form>
-
-
                             </li>
-
                         </ul>
                         <partial class="navbar" name="_LoginPartial" />
                     </div>
+
                     <div class="navbar-nav row">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
@@ -58,10 +55,6 @@
                 </div>
             </div>
         </nav>
-
-
-
-
     </header>
 
 
