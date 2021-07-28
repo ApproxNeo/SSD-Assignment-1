@@ -36,32 +36,42 @@
             </p>
         </form>
     </div>
-    <div class="card-deck col-9">
-        @if ( Model.Product.Count <= 0)
+    <div class="col-9">
+        <div class="row">
+            @if (Model.Product.Count <= 0)
             {
-            <h2>No Products match</h2>
+                <br /><h2>No Products match</h2>
             }
-        @foreach (var item in Model.Product)
-        {
-            <a asp-page="./Details" asp-route-id="@item.Id" id="carditem" style="text-decoration:none;">
-                <div class="card mb-3 shadow" style="width: 11rem;">
-                    <img style="height:150px; width:auto;" class="card-img-top img-thumbnail" src="~/images/@item.PhotoPath" alt="Image not found">
-                    <div class="card-body py-1 px-2">
-                        <h6 class="card-title" style="color:black"> @Html.DisplayFor(modelItem => item.Name)</h6>
-                        <h6 class="card-text" style="color:black">$ @Html.DisplayFor(modelItem => item.Price)</h6>
-                        <form method="post">
-                            <input type="hidden" name="ProductID" value=@item.Id>
-                            <input class="btn btn-primary" type="submit" value="Add to cart" />
-                        </form>
 
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">@Html.DisplayFor(modelItem => item.Brand)</small>
-                    </div>
-                </div>
-            </a>
+        </div>
+        <hr />
+        <div class="card-deck">
 
-        }
+            <div class="row">
+                @foreach (var item in Model.Product)
+                {
+                    <a asp-page="./Details" asp-route-id="@item.Id" id="carditem" style="text-decoration:none;">
+                        <div class="card mb-3 shadow" style="width: 11rem;">
+                            <img style="height:150px; width:auto;" class="card-img-top img-thumbnail" src="~/images/@item.PhotoPath" alt="Image not found">
+                            <div class="card-body py-1 px-2">
+                                <h6 class="card-title" style="color:black"> @Html.DisplayFor(modelItem => item.Name)</h6>
+                                <h6 class="card-text" style="color:black">$ @Html.DisplayFor(modelItem => item.Price)</h6>
+                                <form method="post">
+                                    <input type="hidden" name="ProductID" value=@item.Id>
+                                    <input class="btn btn-primary" type="submit" value="Add to cart" />
+                                </form>
+
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">@Html.DisplayFor(modelItem => item.Brand)</small>
+                            </div>
+                        </div>
+                    </a>
+
+                }
+            </div>
+        </div>
+
     </div>
 
 
