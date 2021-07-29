@@ -1,0 +1,66 @@
+﻿@page
+@model SSD_Assignment_1.Pages.Admin.Audits.RoleAuditModel
+@{
+    ViewData["Title"] = "RoleAudit";
+}
+
+<h1>Role Audit Logs</h1>
+
+<style>
+    table {
+        font-size: 14px;
+    }
+
+    td {
+        word-wrap: break-word;
+    }
+</style>
+<table class="table table-striped" align="left">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Action
+            </th>
+            <th>
+                Performed By
+            </th>
+            <th>
+                Performed On
+            </th>
+            <th>
+                DateTime
+            </th>
+            <th>
+                Role
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Audits)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Audit_ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AuditActionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PerformedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PerformedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTimeStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KeyAuditFieldID)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
