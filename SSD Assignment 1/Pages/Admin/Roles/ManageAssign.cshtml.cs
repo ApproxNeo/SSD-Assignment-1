@@ -72,6 +72,19 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
             if (roleResult.Succeeded)
             {
                 _notyf.Success("Role added to this user!");
+
+                // Login failed attempt - create an audit record
+                var auditrecord = new AuditRecords();
+                auditrecord.AuditActionType = "New Role";
+                auditrecord.DateTimeStamp = DateTime.Now;
+                auditrecord.KeyAuditFieldID = selectedrolename;
+                // 999 – dummy record 
+                auditrecord.PerformedOn = selectedusername  ;
+                auditrecord.PerformedBy = "Admin";
+                // save the email used for the failed login
+                _context.RoleAuditRecord.Add(auditrecord);
+                await _context.SaveChangesAsync();
+
                 return RedirectToPage("Manage");
             }
 

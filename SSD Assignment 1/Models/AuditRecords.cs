@@ -27,7 +27,7 @@ namespace SSD_Assignment_1.Models
     
 
         [Display(Name = "Role affected")]
-        public int KeyAuditFieldID { get; set; }
+        public string KeyAuditFieldID { get; set; }
 
     }
 }
