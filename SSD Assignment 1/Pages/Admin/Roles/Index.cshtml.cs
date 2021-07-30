@@ -17,6 +17,7 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
         private readonly RoleManager<ApplicationRole> _roleManager;
         [BindProperty(SupportsGet = true)]
         public string Searchstring { get; set; }//Role name to type
+       
         public IndexModel(RoleManager<ApplicationRole> roleManager)
         {
             _roleManager = roleManager;

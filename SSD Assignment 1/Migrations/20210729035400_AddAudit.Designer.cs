@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SSD_Assignment_1.Data;
 
 namespace SSD_Assignment_1.Migrations
 {
     [DbContext(typeof(SSD_Assignment_1Context))]
-    partial class SSD_Assignment_1ContextModelSnapshot : ModelSnapshot
+    [Migration("20210729035400_AddAudit")]
+    partial class AddAudit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -285,8 +287,8 @@ namespace SSD_Assignment_1.Migrations
                     b.Property<DateTime>("DateTimeStamp")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("KeyAuditFieldID")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("KeyAuditFieldID")
+                        .HasColumnType("int");
 
                     b.Property<string>("PerformedBy")
                         .HasColumnType("nvarchar(max)");
