@@ -6,11 +6,15 @@
 }
 
 <h1>Audit Logs</h1>
+<a class="btn btn-primary" asp-page="./Index">Product logs</a>
+<a class="btn btn-primary" asp-page="./RoleAudit">Role Assignment logs</a>
+
 
 <style>
     table {
         font-size: 14px;
     }
+
     td {
         word-wrap: break-word;
     }
@@ -42,38 +46,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Audit) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AuditId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TableName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTime)
-            </td>
-            <td style="max-width:20px;">
-                
-                @Html.DisplayFor(modelItem => item.AffectedColumns)
-            </td>
-            <td>
-                @{
-                    var text = Model.DictParser(item.OldValues);
-                }
-                <pre>@Html.DisplayFor(modelItem => text)</pre>
+        @foreach (var item in Model.Audit)
+        {
+            <tr>
+                <td style="width:8px;">
+                    @Html.DisplayFor(modelItem => item.AuditId)
+                </td>
+                <td style="width:15px;">
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td style="width:15px;">
+                    @Html.DisplayFor(modelItem => item.TableName)
+                </td>
+                <td style="width:20px;">
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td style="width:20px;">
 
-            </td>
-            <td>
-                @{
-                    var text2 = Model.DictParser(item.NewValues);
-                }
-                <pre>@Html.DisplayFor(modelItem => text2)</pre>
-            </td>
-        </tr>
-}
+                    @Html.DisplayFor(modelItem => item.AffectedColumns)
+                </td>
+                <td style="width:40px;">
+                    @{
+                        var text = Model.DictParser(item.OldValues);
+                    }
+                    <pre>@Html.DisplayFor(modelItem => text)</pre>
+
+                </td>
+                <td style="width:40px;">
+                    @{
+                        var text2 = Model.DictParser(item.NewValues);
+                    }
+                    <pre>@Html.DisplayFor(modelItem => text2)</pre>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

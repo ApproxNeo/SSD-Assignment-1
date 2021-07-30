@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using SSD_Assignment_1.Models;
 using Microsoft.AspNetCore.Authorization;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using System.Security.Claims;
 
 namespace SSD_Assignment_1.Pages.Admin.Roles
 {
@@ -72,16 +73,17 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
 
             if (await UserManager.IsInRoleAsync(user, delrolename))
             {
+                string UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 await UserManager.RemoveFromRoleAsync(user, delrolename);
                 // Login failed attempt - create an audit record
-                var auditrecord = new AuditRecords();
-                auditrecord.AuditActionType = "Delete Role";
-                auditrecord.DateTimeStamp = DateTime.Now;
-                auditrecord.KeyAuditFieldID = delrolename;
-                // 999 – dummy record 
-                auditrecord.PerformedOn = delusername;
-                auditrecord.PerformedBy = "Admin";
-                // save the email used for the failed login
+                var auditrecord = new AuditRecords() { 
+                    AuditActionType = "Removed a role",
+                    DateTimeStamp = DateTime.Now,
+                    KeyAuditFieldID = delrolename,
+                    PerformedOn = (await _userManager.FindByNameAsync(delusername)).Id,
+                    PerformedBy = UserId
+                };
+       
                 _context.RoleAuditRecord.Add(auditrecord);
                 await _context.SaveChangesAsync();
                 _notyf.Success("Role removed from this user successfully");

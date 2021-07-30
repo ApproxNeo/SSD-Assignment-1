@@ -1,19 +1,14 @@
 ﻿@page
-@model SSD_Assignment_1.Pages.Admin.Audits.RoleAuditModel
+@model SSD_Assignment_1.Pages.Admin.Audits.RoleAudit.RoleAuditModel
 @{
     ViewData["Title"] = "RoleAudit";
 }
 
 <h1>Role Audit Logs</h1>
+<a class="btn btn-primary" asp-page="./Index">Product logs</a>
+<a class="btn btn-primary" asp-page="./RoleAudit">Role Assignment logs</a>
 
-<style>
-    table {
-        font-size: 14px;
-    }
 
-    td {
-        word-wrap: break-word;
-    }
 </style>
 <table class="table table-striped" align="left">
     <thead>
@@ -41,26 +36,27 @@
     <tbody>
         @foreach (var item in Model.Audits)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Audit_ID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AuditActionType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PerformedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PerformedOn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTimeStamp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KeyAuditFieldID)
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Audit_ID)
+                </td>
+                <td>
+                   
+                    @Html.DisplayFor(modelItem => item.AuditActionType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PerformedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PerformedOn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTimeStamp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.KeyAuditFieldID)
+                </td>
+            </tr>
         }
     </tbody>
 </table>

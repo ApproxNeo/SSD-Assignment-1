@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -15,18 +16,22 @@ namespace SSD_Assignment_1.Pages.Orders
     public class IndexModel : PageModel
     {
         private readonly SSD_Assignment_1.Data.SSD_Assignment_1Context _context;
+        private readonly INotyfService _notyf;
 
 
-        public IndexModel(SSD_Assignment_1.Data.SSD_Assignment_1Context context)
+        public IndexModel(SSD_Assignment_1.Data.SSD_Assignment_1Context context, INotyfService notyf)
         {
             _context = context;
+            _notyf = notyf;
         }
 
         [BindProperty]
         public List<Models.Order> Order { get; set; }
 
+
         public async Task OnGetAsync()
         {
+            int Unpaid = 0;
             string UserId = User?.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             IQueryable<Models.Order> CartQuery = from m in _context.Order where UserId.Equals(m.UserId) select m;
@@ -42,10 +47,16 @@ namespace SSD_Assignment_1.Pages.Orders
                     {
                         o.PaymentStatus = paymentIntent.Status;
                     }
+                    Unpaid += 1;
                 }
             }
 
             await _context.SaveChangesAsync();
+
+            if (Unpaid > 0)
+            {
+                _notyf.Information(String.Format("You have {0} order(s) with payment due", Unpaid));
+            }
         }
 
         [BindProperty]

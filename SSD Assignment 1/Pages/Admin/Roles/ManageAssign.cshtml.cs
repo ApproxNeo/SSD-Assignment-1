@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using SSD_Assignment_1.Models;
 using Microsoft.AspNetCore.Authorization;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using System.Security.Claims;
 
 namespace SSD_Assignment_1.Pages.Admin.Roles
 {
@@ -42,7 +43,8 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
 
 
         public async Task OnGetAsync()
-        {   //HTTPGet  - when form is being loaded
+        {
+            //HTTPGet  - before form is loaded
             //get list of roles and users
             IQueryable<string> RoleQuery = from m in _roleManager.Roles orderby m.Name select m.Name;
             IQueryable<string> UsersQuery = from u in _context.Users orderby u.UserName select u.UserName;
@@ -61,6 +63,7 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
             //When the Assign button is pressed 
             if (selectedusername == null || selectedrolename == null)
             {
+                _notyf.Warning("Please choose a Role & User");
                 return RedirectToPage("Manage");
             }
 
@@ -71,24 +74,31 @@ namespace SSD_Assignment_1.Pages.Admin.Roles
 
             if (roleResult.Succeeded)
             {
-                _notyf.Success("Role added to this user!");
+
+                string UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                _notyf.Success("Role added successfully to this user!");
 
                 // Login failed attempt - create an audit record
-                var auditrecord = new AuditRecords();
-                auditrecord.AuditActionType = "New Role";
-                auditrecord.DateTimeStamp = DateTime.Now;
-                auditrecord.KeyAuditFieldID = selectedrolename;
-                // 999 – dummy record 
-                auditrecord.PerformedOn = selectedusername  ;
-                auditrecord.PerformedBy = "Admin";
-                // save the email used for the failed login
+                var auditrecord = new AuditRecords()
+                {
+                    AuditActionType = "Assigned a role",
+                    DateTimeStamp = DateTime.Now,
+                    KeyAuditFieldID = selectedrolename,
+                    PerformedOn = AppUser.Id,
+                    PerformedBy = UserId,
+                };
+               
                 _context.RoleAuditRecord.Add(auditrecord);
                 await _context.SaveChangesAsync();
 
                 return RedirectToPage("Manage");
             }
 
+            _notyf.Warning("An error ocurred while adding that role");
+
             return RedirectToPage("Manage");
         }
+
+       
     }
 }
