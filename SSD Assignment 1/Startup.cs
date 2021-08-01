@@ -28,6 +28,8 @@ namespace SSD_Assignment_1
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+
         }
 
         public IConfiguration Configuration { get; }
@@ -35,12 +37,16 @@ namespace SSD_Assignment_1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+
+
+
             services.AddDbContext<SSD_Assignment_1Context>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //.AddEntityFrameworkStores<SSD_Assignment_1Context>();
-            
+
             //sending confirmation email
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
@@ -48,6 +54,7 @@ namespace SSD_Assignment_1
             services.AddRazorPages();
 
             services.AddAuthentication()
+
         .AddGoogle(options =>
         {
             IConfigurationSection googleAuthNSection =
@@ -65,10 +72,12 @@ namespace SSD_Assignment_1
                 .AddEntityFrameworkStores<SSD_Assignment_1Context>()
                 .AddDefaultTokenProviders();
 
-            services.AddNotyf(config => 
-                               {config.DurationInSeconds = 10; 
-                                config.IsDismissable = true; 
-                                config.Position = NotyfPosition.TopRight; });
+            services.AddNotyf(config =>
+                               {
+                                   config.DurationInSeconds = 10;
+                                   config.IsDismissable = true;
+                                   config.Position = NotyfPosition.TopRight;
+                               });
 
 
             services.AddMvc()
@@ -78,7 +87,7 @@ namespace SSD_Assignment_1
                 //options.Conventions.AuthorizeFolder("/Admin/Products");
                 //options.Conventions.AuthorizeFolder("/Admin/Roles");
                 //options.Conventions.AuthorizeFolder("/Admin/Audit");
-      
+
             });
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
@@ -120,7 +129,7 @@ namespace SSD_Assignment_1
             });
 
 
-        
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -128,7 +137,7 @@ namespace SSD_Assignment_1
         {
             if (env.IsDevelopment())
             {
-               app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseStatusCodePagesWithRedirects("/Error?id={0}");
                 app.UseExceptionHandler("/Error");
@@ -140,7 +149,7 @@ namespace SSD_Assignment_1
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+
             StripeConfiguration.ApiKey = Environment.GetEnvironmentVariable("STRIPE_KEY");
 
             app.UseNotyf();

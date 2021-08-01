@@ -17,11 +17,13 @@ namespace SSD_Assignment_1.Pages.Payment
     {
         private readonly SSD_Assignment_1.Data.SSD_Assignment_1Context _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public IndexModel(SSD_Assignment_1.Data.SSD_Assignment_1Context context, UserManager<ApplicationUser> userManager)
+        public IndexModel(SSD_Assignment_1.Data.SSD_Assignment_1Context context, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _context = context;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
 
@@ -45,6 +47,10 @@ namespace SSD_Assignment_1.Pages.Payment
 
         public async Task<IActionResult> OnPostAsync()
         {
+            if (!(_signInManager.IsSignedIn(User)))
+            {
+                return Redirect("~");
+            }
 
             string UserId = User?.FindFirst(ClaimTypes.NameIdentifier).Value;
             ApplicationUser user = await _userManager.GetUserAsync(User);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -17,21 +18,29 @@ namespace SSD_Assignment_1.Pages.Orders
     {
         private readonly SSD_Assignment_1.Data.SSD_Assignment_1Context _context;
         private readonly INotyfService _notyf;
+        private readonly SignInManager<ApplicationUser> _signInManager;
 
 
-        public IndexModel(SSD_Assignment_1.Data.SSD_Assignment_1Context context, INotyfService notyf)
+        public IndexModel(SSD_Assignment_1.Data.SSD_Assignment_1Context context, SignInManager<ApplicationUser> signInManager, INotyfService notyf)
         {
             _context = context;
             _notyf = notyf;
+            _signInManager = signInManager;
         }
 
         [BindProperty]
         public List<Models.Order> Order { get; set; }
 
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             int Unpaid = 0;
+
+            if (!(_signInManager.IsSignedIn(User)))
+            {
+                return Redirect("~/");
+            }
+
             string UserId = User?.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             IQueryable<Models.Order> CartQuery = from m in _context.Order where UserId.Equals(m.UserId) select m;
@@ -57,6 +66,8 @@ namespace SSD_Assignment_1.Pages.Orders
             {
                 _notyf.Information(String.Format("You have {0} order(s) with payment due", Unpaid));
             }
+
+            return Page();
         }
 
         [BindProperty]
