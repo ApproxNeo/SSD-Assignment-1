@@ -13,7 +13,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-image:url('../../../images/cool-background.png');color:white">
             <div class="container">
                 <div class="col-3">
                     <a class="navbar-brand" asp-area="" asp-page="/Index">
@@ -33,7 +33,7 @@
                                 <form class="input-group" method="post" asp-page="~/Products/Index">
                                     <input type="text" class="form-control" placeholder="Search for Products" id="search" >
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="window.location.replace('../../../Products/Index?SearchString=' + document.getElementById('search').value);">Search</button>
+                                        <button class="btn btn-outline-secondary" type="button" onclick="window.location.replace('../../../Products/Index?SearchString=' + document.getElementById('search').value);" style="background-color:ghostwhite">Search</button>
                                     </div>
                                 </form>
 

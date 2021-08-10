@@ -4,8 +4,9 @@
 @{
     ViewData["Title"] = "Payment";
 }
-
 <script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.33.1/sweetalert2.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="~/css/stripe.css" />
 
 <div class="text-center">
@@ -19,6 +20,13 @@
         You have a payment of @Model.order.Price due
     </div>
 </div>
+
+<style>
+
+    .swal-overlay {
+        background-color: rgba(128, 128, 128, 0.2);
+    }
+</style>
 
 
 @{
@@ -38,7 +46,7 @@
                             <input class="form-check-input" type="checkbox" value="" id="reuse" style="height:20px;width:20px;">
                             <label class="form-check-label" for="reuse">Save for future use?</label>
                         </div>
-                        
+
                         <p id="card-errors" role="alert"></p>
                     </div>
                 </div>
@@ -70,7 +78,10 @@
                     displayError.textContent = '';
                 }
             });
-
+            function Complete() {
+                window.location.replace('../../../Orders/Index');
+;
+            }
             function submitQuery() {
                 const check = document.getElementById('reuse');
 
@@ -78,7 +89,7 @@
                     payment_method: {
                         card: card,
                         billing_details: {
-                            name: 'Jenny Rosen'
+                            name: 'Customer'
                         }
                     }
                 }
@@ -86,27 +97,33 @@
                 if (check.checked) {
                     options.setup_future_usage = 'off_session';
                 }
-
-            stripe.confirmCardPayment("@Model.ClientSecret", options).
-                    then(function (result) {
-        if (result.error) {
-            // Show error to your customer
-            var displayError = document.getElementById('card-errors');
-            displayError.textContent = event.error.message;
-            console.log(result.error.message);
-        } else {
-            if (result.paymentIntent.status === 'succeeded') {
-                // Show a success message to your customer
-                // There's a risk of the customer closing the window before callback execution
-                // Set up a webhook or plugin to listen for the payment_intent.succeeded event
-                // to save the card to a Customer
-
-                // The PaymentMethod ID can be found on result.paymentIntent.payment_method
-            }
-        }
-    })
-
-    };
+                Swal.fire({
+                    type: 'info',
+                    title: 'Processing',
+                    showConfirmButton: false,
+                })
+                stripe.confirmCardPayment("@Model.ClientSecret", options)
+                    .then(function (result) {
+                        swal.close();
+                        if (result.error) {
+                            // Show error to your customer
+                            var displayError = document.getElementById('card-errors');
+                            displayError.textContent = event.error.message;
+                            console.log(result.error.message);
+                        } else {
+                            if (result.paymentIntent.status === 'succeeded') {
+                                Swal.fire({
+                                    type: 'success',
+                                    title: 'Purchase Complete!',
+                                    text: 'Our Customer Service Officer will contact you soon, thank you for shopping with Cesars',
+                                    showConfirmButton: false,
+                                    timer: 6000,
+                                    onClose: Complete  
+                                });
+                            }
+                        }
+                    })
+            };
         </script>
 
     }
@@ -128,3 +145,5 @@
         </div>
     }
 }
+
+
