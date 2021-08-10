@@ -5,9 +5,12 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Cesar's Creatures</h1>
+    <h1 class="display-4">
+        𝓒𝓮𝓼𝓪𝓻'𝓼 𝓒𝓻𝓮𝓪𝓽𝓾𝓻𝓮𝓼 | (Ｕ◕ฺ㉨◕ฺ)
+    </h1>
     <p>Home for the pets</p>
 </div>
+<hr style="padding:20px 20px 20px 20px;" />
 
 @if (Model.Carts.Count == 0)
 {
@@ -44,18 +47,18 @@ else
 
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => Model.Products[i].Price)
+                            $@Html.DisplayFor(modelItem => Model.Products[i].Price)
                         </td>
                         <td>
                             @{
                                 decimal total = Model.Carts[i].Quantity * Model.Products[i].Price;
                                 totalPrice += total;
                             }
-                            @Html.DisplayFor(modelItem => total)
+                            $@Html.DisplayFor(modelItem => total)
                         </td>
                         <td>
                             <form method="post" asp-page-handler="RmvProd">
-                                <input type="hidden" value="@Model.Carts[i].CartItemId" asp-for="CartId"/>
+                                <input type="hidden" value="@Model.Carts[i].CartItemId" asp-for="CartId" />
                                 <button type="button" class="btn btn-default btn-sm" onclick="javascript: this.form.submit();">
                                     <i class="fa fa-minus-circle"></i>
                                 </button>
@@ -69,7 +72,7 @@ else
                     <td></td>
                     <td><b>>Order Total:</b></td>
                     <td>
-                        @Html.DisplayFor(modelItem => totalPrice)
+                        $@Html.DisplayFor(modelItem => totalPrice)
                     </td>
                     <td></td>
                 </tr>
