@@ -55,8 +55,13 @@ namespace SSD_Assignment_1.Pages.Orders
                     if (paymentIntent.Status == "succeeded")
                     {
                         o.PaymentStatus = paymentIntent.Status;
+                        _notyf.Success("Payment successfully made");
                     }
-                    Unpaid += 1;
+                    else
+                    {
+                        Unpaid += 1;
+                    }
+                    
                 }
             }
 

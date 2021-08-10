@@ -78,15 +78,26 @@ namespace SSD_Assignment_1.Pages.Cart
 
         public async Task<IActionResult> OnPostQtyChangeAsync()
         {
+            
             string UserId = User?.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             IQueryable<CartItem> CartQuery = from m in _context.CartItems where UserId.Equals(m.UserId) select m;
             IQueryable<CartItem> ModifiedCart = CartQuery.Where(s => s.ProductId == QtyChange.ProductId);
 
-            if (ModifiedCart.Count() != 1) { return Page(); }
 
-            ModifiedCart.FirstOrDefault().Quantity = QtyChange.NQuantity;
-            await _context.SaveChangesAsync();
+            if (QtyChange.NQuantity < 1 || QtyChange.NQuantity > 99 || ModifiedCart.Count() != 1)
+            {
+                _notyf.Information("Quantity can only be between 1 and 99 inclusive");
+            }
+            else
+            {
+                if (ModifiedCart.FirstOrDefault().UserId != UserId)
+                {
+                    return Redirect("~/");
+                }
+                ModifiedCart.FirstOrDefault().Quantity = QtyChange.NQuantity;
+                await _context.SaveChangesAsync();
+            }
 
             Carts = CartQuery.ToList();
 
@@ -103,7 +114,7 @@ namespace SSD_Assignment_1.Pages.Cart
 
         public IList<CartItem> OrderItems;
 
-        public Dictionary<int, int> OrderDetails;
+        public Dictionary<string, int> OrderDetails;
 
         public async Task<IActionResult> OnPostCheckoutAsync()
         {
@@ -141,13 +152,13 @@ namespace SSD_Assignment_1.Pages.Cart
             
 
             OrderItems = CartQuery.ToList();
-            OrderDetails = new Dictionary<int, int>();
+            OrderDetails = new Dictionary<string, int>();
             decimal Price = 0;
             foreach (var i in OrderItems)
             {
                 Models.Product prod = await _context.Product.FindAsync(i.ProductId);
                 Price += i.Quantity * prod.Price; 
-                OrderDetails[i.ProductId] = i.Quantity;
+                OrderDetails[prod.Name] = i.Quantity;
                 CartItem item = await _context.CartItems.FindAsync(i.CartItemId);
                 _context.CartItems.Remove(item);
             }
@@ -178,6 +189,30 @@ namespace SSD_Assignment_1.Pages.Cart
             await _context.SaveChangesAsync();
 
             return Redirect("~/Orders");
+
+        }
+
+        [BindProperty]
+        public int CartId { get; set; }
+        public async Task<IActionResult> OnPostRmvProdAsync()
+        {
+
+            string UserId = User?.FindFirst(ClaimTypes.NameIdentifier).Value;
+            CartItem Item = await _context.CartItems.FindAsync(CartId);
+
+            if (Item.UserId != UserId)
+            {
+                return Redirect("~/"); ;
+            }
+
+            _context.Remove(Item);
+            await _context.SaveChangesAsync();
+            _notyf.Success("Product removed from cart successfully");
+            await OnGetAsync();
+            return Page();
+
+
+
 
         }
     }
