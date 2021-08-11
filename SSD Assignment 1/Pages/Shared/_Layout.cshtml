@@ -17,12 +17,9 @@
             z-index:-100;
         }
     </style>
-
 </head>
 
 <body>
-
-
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3" style="background-image:url('../../../images/cool-background.png');color:white">
             <div class="container">
@@ -35,8 +32,6 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
-
-
                 <div class="col-9">
                     <div class="navbar-nav row align-content-center">
                         <ul class="navbar-nav flex-grow-1">
@@ -47,10 +42,7 @@
                                         <button class="btn btn-outline-secondary" type="button" onclick="window.location.replace('../../../Products/Index?SearchString=' + document.getElementById('search').value);" style="background-color:ghostwhite">Search</button>
                                     </div>
                                 </form>
-
-
                             </li>
-
                         </ul>
                         <partial class="navbar" name="_LoginPartial" />
                     </div>
@@ -69,10 +61,6 @@
                 </div>
             </div>
         </nav>
-
-
-
-
     </header>
 
     <div id="flair" style="background-color:antiquewhite"></div>
@@ -101,8 +89,8 @@
             let myElement = document.getElementById("flair");
             let mySparticles = new Sparticles(myElement, {
                 "composition": "source-over",
-                "count": 300,
-                "speed": 10,
+                "count": 500,
+                "speed": 15,
                 "parallax": 1,
                 "direction": 360,
                 "xVariance": 2,
@@ -113,10 +101,10 @@
                 "alphaVariance": 1,
                 "minAlpha": 0,
                 "maxAlpha": 1,
-                "minSize": 1,
-                "maxSize": 10,
+                "minSize": 4,
+                "maxSize": 12,
                 "style": "both",
-                "bounce": false,
+                "bounce": true,
                 "drift": 10,
                 "glow": 0,
                 "twinkle": true,

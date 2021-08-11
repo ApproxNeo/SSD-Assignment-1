@@ -29,15 +29,15 @@
 <hr style="padding:20px 20px 20px 20px;" />
 
 <div class="row">
-    <div id="filtering" class="col-2">
-        <form>
+    <div id="filtering" class="col-2" style="background-color:lightgray">
+        <form style="padding-top:50px;">
             <p>
-                <input type="text" asp-for="SearchString" size=10 placeholder="Search for a product for your pet!" />
+                <input type="text" asp-for="SearchString" size=11 placeholder="Search..." />
                 <br />
-                <select asp-for="SearchGenre" asp-items="Model.Genres">
+                <select asp-for="SearchGenre" asp-items="Model.Genres" style="width:9em;">
                     <option value="">Genre</option>
                 </select>
-                <select asp-for="SearchBrand" asp-items="Model.Brands">
+                <select asp-for="SearchBrand" asp-items="Model.Brands" style="width:9em;">
                     <option value="">Brand</option>
                 </select>
                 <br />

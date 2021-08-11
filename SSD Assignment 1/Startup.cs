@@ -37,10 +37,6 @@ namespace SSD_Assignment_1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-
-
-
             services.AddDbContext<SSD_Assignment_1Context>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -57,11 +53,13 @@ namespace SSD_Assignment_1
 
         .AddGoogle(options =>
         {
-            IConfigurationSection googleAuthNSection =
-                Configuration.GetSection("Authentication:Google");
-
+            IConfigurationSection googleAuthNSection = Configuration.GetSection("Authentication:Google");
             options.ClientId = googleAuthNSection["ClientId"];
             options.ClientSecret = googleAuthNSection["ClientSecret"];
+            Console.WriteLine(options);
+            Console.WriteLine(options.AuthorizationEndpoint);
+            Console.WriteLine(options.CallbackPath);
+            //options.CallbackPath = 
         });
 
             services.AddDbContext<SSD_Assignment_1Context>(options =>
@@ -114,22 +112,12 @@ namespace SSD_Assignment_1
                 options.SignIn.RequireConfirmedAccount = true;
             });
 
-
             services.ConfigureApplicationCookie(options =>
             {
-                // options.Cookie.Name = "YourCookieName";
-                //  options.Cookie.Domain=
-                // options.LoginPath = "/Account/Login";
-                // options.LogoutPath = "/Account/Logout";
-                // options.AccessDeniedPath = "/Account/AccessDenied";
-
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromSeconds(1200);
                 options.SlidingExpiration = true;
             });
-
-
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -141,12 +129,14 @@ namespace SSD_Assignment_1
                 app.UseDatabaseErrorPage();
                 app.UseStatusCodePagesWithRedirects("/Error?id={0}");
                 app.UseExceptionHandler("/Error");
+                app.UseHsts();
             }
             else
             {
-                //app.UseStatusCodePages("text/html", "<h1>Status code page</h1> <h2>Status Code: {0}</h2>");
-                //app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+                app.UseStatusCodePagesWithRedirects("/Error?id={0}");
+                app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
 

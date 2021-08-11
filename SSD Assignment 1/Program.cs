@@ -21,7 +21,7 @@ namespace SSD_Assignment_1
             if (Environment.GetEnvironmentVariable("STRIPE_KEY") is null || Environment.GetEnvironmentVariable("PUBLISHABLE_KEY") is null)
             {
                 Console.WriteLine("No applicable stripe key found, refer to README on repo");
-                Environment.Exit(-1);
+                //Environment.Exit(-1);
             }
 
             var host = CreateHostBuilder(args).Build();
